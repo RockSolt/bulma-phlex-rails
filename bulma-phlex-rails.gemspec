@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/bulma/phlex/rails/version"
+require_relative "lib/bulma_phlex_rails/version"
 
 Gem::Specification.new do |spec|
   spec.name = "bulma-phlex-rails"
-  spec.version = Bulma::Phlex::Rails::VERSION
+  spec.version = BulmaPhlexRails::VERSION
   spec.authors = ["Todd Kummer"]
   spec.email = ["todd@rockridgesolutions.com"]
 
