@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/rocksolt/bulma-phlex.git
+  revision: 52186441f92a73883326d6895fb33d937a00fc38
+  branch: bulma-phlex-rails-prep
+  specs:
+    bulma-phlex (0.7.0)
+      phlex (>= 2.0.2)
+
 PATH
   remote: .
   specs:
@@ -22,6 +30,8 @@ GEM
     parser (3.3.10.0)
       ast (~> 2.4.1)
       racc
+    phlex (2.3.1)
+      zeitwerk (~> 2.7)
     pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
@@ -59,12 +69,14 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.1.0)
+    zeitwerk (2.7.3)
 
 PLATFORMS
   arm64-darwin-24
   ruby
 
 DEPENDENCIES
+  bulma-phlex!
   bulma-phlex-rails!
   irb
   minitest (~> 5.16)
