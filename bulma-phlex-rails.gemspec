@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/bulma_phlex_rails/version"
+require_relative "lib/bulma_phlex/rails/version"
 
 Gem::Specification.new do |spec|
   spec.name = "bulma-phlex-rails"
-  spec.version = BulmaPhlexRails::VERSION
+  spec.version = BulmaPhlex::Rails::VERSION
   spec.authors = ["Todd Kummer"]
   spec.email = ["todd@rockridgesolutions.com"]
 
@@ -18,7 +18,4 @@ Gem::Specification.new do |spec|
   spec.metadata["homepage_uri"] = spec.homepage
 
   spec.files = Dir["lib/**/*"]
-
-  # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
 end
