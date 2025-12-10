@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = "Create forms with Bulma CSS framework styles using Phlex components in your Rails applications."
   spec.homepage = "https://github.com/RockSolt/bulma-phlex-rails"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.2.0"
+  spec.required_ruby_version = ">= 3.4"
 
   spec.metadata["rubygems_mfa_required"] = "true"
   spec.metadata["homepage_uri"] = spec.homepage
