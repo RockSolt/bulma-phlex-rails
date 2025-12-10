@@ -7,6 +7,7 @@ loader = Zeitwerk::Loader.for_gem_extension(BulmaPhlex)
 loader.setup
 
 module BulmaPhlex
+  # The Rails namespace provides Bulma Phlex components and helpers for integration with Ruby on Rails applications.
   module Rails
     # Your code goes here...
   end

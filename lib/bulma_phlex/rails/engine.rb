@@ -2,6 +2,7 @@
 
 module BulmaPhlex
   module Rails
+    # Rails Engine for BulmaPhlex
     class Engine < ::Rails::Engine
       initializer "bulma_phlex.rails.importmap", before: "importmap" do |app|
         app.config.importmap.paths << Engine.root.join("config/importmap.rb")
