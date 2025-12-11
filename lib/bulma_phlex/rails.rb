@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+require "action_view"
 require "bulma-phlex"
+require "phlex-rails"
 require "zeitwerk"
 
 loader = Zeitwerk::Loader.for_gem_extension(BulmaPhlex)

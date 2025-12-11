@@ -18,4 +18,10 @@ Gem::Specification.new do |spec|
   spec.metadata["homepage_uri"] = spec.homepage
 
   spec.files = Dir["lib/**/*"]
+
+  spec.add_dependency "actionpack", ">= 7.2"
+  # this is pinned to main in the Gemfile for now
+  # spec.add_dependency "bulma-phlex", ">= 0.7.0"
+  spec.add_dependency "phlex-rails", ">= 2.3"
+  spec.add_dependency "railties", ">= 7.2"
 end
