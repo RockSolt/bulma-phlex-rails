@@ -2,6 +2,10 @@ AllCops:
   TargetRubyVersion: 3.4
   NewCops: enable
 
+Metrics/MethodLength:
+  Exclude:
+    - test/**/*_test.rb
+
 Naming/FileName:
   Exclude:
     - lib/bulma-phlex-rails.rb
