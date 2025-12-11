@@ -2,6 +2,10 @@ AllCops:
   TargetRubyVersion: 3.4
   NewCops: enable
 
+Lint/MissingSuper:
+  Exclude:
+    - lib/bulma_phlex/rails/components/**/*.rb
+
 Metrics/MethodLength:
   Exclude:
     - test/**/*_test.rb
