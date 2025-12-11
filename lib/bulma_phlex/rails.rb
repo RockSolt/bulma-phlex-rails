@@ -6,6 +6,7 @@ require "phlex-rails"
 require "zeitwerk"
 
 loader = Zeitwerk::Loader.for_gem_extension(BulmaPhlex)
+loader.collapse("#{__dir__}/rails/components")
 loader.setup
 
 module BulmaPhlex
