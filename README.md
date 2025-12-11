@@ -1,6 +1,6 @@
-# Bulma Phlex Rails
+# Bulma Phlex Rails–Coming Soon!
 
-Coming soon: Build Rails applications with the power of Phlex and the elegance of Bulma CSS framework. Use Bulma components and a Rails form builder to create clean, responsive applications.
+Build Rails applications with the power of Phlex and the elegance of Bulma CSS framework. Use Bulma components and a Rails form builder to create clean, responsive applications.
 
 ## Form Builder
 
@@ -60,7 +60,8 @@ For example, want your amount input to include a dollar sign icon?
 form.text_field :amount, icon_left: "dollar-sign"
 ```
 
-Under the hood the form builder still uses Rails form helpers, so all standard options are supported as well and you get the full power of Rails forms.
+> [!NOTE]
+> Under the hood the form builder still uses Rails form helpers, so all standard options are supported as well and you get the full power of Rails forms.
 
 ### Columns and Grids
 
