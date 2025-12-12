@@ -9,6 +9,9 @@ module Warning
   end
 end
 
+# Define Turbo module for testing purposes; this causes the CardHelper to be included
+module Turbo; end
+
 $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 require "bulma-phlex-rails"
 require "minitest/autorun"
