@@ -10,6 +10,8 @@ loader.collapse("#{__dir__}/rails/components")
 loader.collapse("#{__dir__}/rails/helpers")
 loader.setup
 
+require "bulma_phlex/rails/engine"
+
 module BulmaPhlex
   # The Rails namespace provides Bulma Phlex components and helpers for integration with Ruby on Rails applications.
   module Rails

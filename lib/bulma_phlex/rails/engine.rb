@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rails/engine"
+
 module BulmaPhlex
   module Rails
     # Rails Engine for BulmaPhlex
