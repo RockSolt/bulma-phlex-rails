@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.metadata["rubygems_mfa_required"] = "true"
   spec.metadata["homepage_uri"] = spec.homepage
 
-  spec.files = Dir["lib/**/*"]
+  spec.files = Dir["lib/**/*", "app/**/*", "config/importmap.rb"]
 
   spec.add_dependency "actionpack", ">= 7.2"
   spec.add_dependency "bulma-phlex", ">= 0.8.0" # switches namespace to BulmaPhlex
