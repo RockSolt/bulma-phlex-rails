@@ -11,7 +11,4 @@ group :development, :test do
   gem "minitest-difftastic"
   gem "rake", "~> 13.0"
   gem "rubocop", "~> 1.21"
-
-  # point to main branch of bulma-phlex until it releases related changes in new version
-  gem "bulma-phlex", github: "rocksolt/bulma-phlex", branch: "main"
 end
