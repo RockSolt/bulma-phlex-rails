@@ -1,8 +1,16 @@
-# Bulma Phlex Rails–Coming Soon!
+[![Gem Version](https://badge.fury.io/rb/bulma-phlex-rails.svg)](https://badge.fury.io/rb/bulma-phlex-rails)
+
+# Bulma Phlex Rails
 
 Build Rails applications with the power of Phlex and the elegance of Bulma CSS framework. Use Bulma components and a Rails form builder to create clean, responsive applications.
 
-## Form Builder
+> [!IMPORTANT]
+> The Form Builder is still under development. The documentation below describes the planned functionality. See the issues list for progress.
+>
+> The BulmaPhlex components, with the Rails extensions as well as the related Stimulus controllers, are available now.
+
+
+## Form Builder–Coming Soon!
 
 The custom form builder that simplifies the process of creating forms with Bulma styles. It overrides the form helpers to generate Bulma-compatible HTML.
 
@@ -172,3 +180,19 @@ BulmaPhlex::Table(invoices) do |table|
   table.date_colum "Due Date", &:due_date
 end
 ```
+
+## Development
+
+After checking out the repo, run `bundle install` to install dependencies. Then, run `rake test` to run the tests.
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/RockSolt/bulma-phlex-rails.
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Credits
+
+This leverages the [Bulma CSS library](https://bulma.io/documentation/) and [Phlex](https://www.phlex.fun/) but is not endorsed or certified by either. We are fans of the both and this makes using them together easier.
