@@ -20,7 +20,7 @@ module BulmaPhlex
     class FormField < Phlex::HTML
       include Phlex::Rails::Helpers::Label
 
-      def initialize(object_name, method, **options)
+      def initialize(object_name, method, options = {})
         @object_name = object_name
         @method = method
         @options = options

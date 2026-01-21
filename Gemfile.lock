@@ -26,6 +26,8 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
+    activemodel (8.1.1)
+      activesupport (= 8.1.1)
     activesupport (8.1.1)
       base64
       bigdecimal
@@ -188,6 +190,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  activemodel
   bulma-phlex-rails!
   irb
   minitest (~> 5.16)

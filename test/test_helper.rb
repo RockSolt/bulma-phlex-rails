@@ -16,6 +16,7 @@ $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 require "bulma-phlex-rails"
 require "minitest/autorun"
 require "nokogiri"
+require "active_model"
 require "active_support/test_case"
 require "action_view/test_case"
 
