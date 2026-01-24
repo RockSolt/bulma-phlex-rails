@@ -39,12 +39,18 @@ The following form helpers are supported:
 - date_field
 - time_field
 - datetime_field
+- datetime_local_field
 - week_field
 - month_field
 - url_field
 - email_field
 - number_field
+- search_field
+- color_field
 - range_field
+
+The following form helpers are still under construction:
+
 - checkbox
 - checkbox_display
 - select
@@ -85,13 +91,23 @@ form.columns do
 end
 ```
 
-You can also size the columns:
+You can also size the columns, using either the names like "half", "two-thirds", etc., or the numeric values 1-12.
 
 ```ruby
 form.columns do
-  form.text_field :city, column: "is-half"
-  form.text_field :state, column: "is-2"
-  form.text_field :zip
+  form.text_field :city, column: "half"
+  form.text_field :state, column: 2
+  form.text_field :zip, column: "narrow"
+end
+```
+
+Bulma allows columns to be assigned different widths at different viewport sizes. Pass in a hash to the `column` option to specify those:
+
+```ruby
+form.columns do
+  form.text_field :city, column: { mobile: "full", tablet: "half", desktop: "one-third" }
+  form.text_field :state, column: { mobile: "full", tablet: "one-quarter", desktop: "one-sixth" }
+  form.text_field :zip, column: { mobile: "full", tablet: "one-quarter", desktop: "one-sixth" }
 end
 ```
 
@@ -111,9 +127,9 @@ You can still provide guidance on the grid cell sizes:
 
 ```ruby
 form.grid do
-  form.telephone_field :phone, column: "is-col-span-2"
-  form.email_field :email, column: "is-col-span-2"
-  form.text_field :city, column: "is-col-span-2"
+  form.telephone_field :phone, column: "col-span-2"
+  form.email_field :email, column: "col-span-3"
+  form.text_field :city, column: "col-span-2"
   form.text_field :state
   form.text_field :zip
 end
@@ -122,7 +138,7 @@ end
 Or use a fixed grid to quickly create a uniform layout:
 
 ```ruby
-form.grid(columns: 3) do
+form.fixed_grid(columns: 3) do
   form.telephone_field :phone
   form.email_field :email
   form.text_field :city
