@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir["lib/**/*", "app/**/*", "config/importmap.rb"]
 
   spec.add_dependency "actionpack", ">= 7.2"
-  spec.add_dependency "bulma-phlex", ">= 0.8.0" # switches namespace to BulmaPhlex
+  spec.add_dependency "bulma-phlex", ">= 0.9.0"
   spec.add_dependency "phlex-rails", ">= 2.3"
   spec.add_dependency "railties", ">= 7.2"
 end
