@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bulma-phlex-rails (0.2.1)
+    bulma-phlex-rails (0.3.0)
       actionpack (>= 7.2)
       bulma-phlex (>= 0.9.0)
       phlex-rails (>= 2.3)
