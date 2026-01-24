@@ -60,6 +60,18 @@ module BulmaPhlex
           </div>
         HTML
       end
+
+      def test_text_field_with_no_label
+        html = @form.text_field(:name, suppress_label: true)
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <div class="control">
+              <input class="input" type="text" value="John Doe" name="test_model[name]" id="test_model_name" />
+            </div>
+          </div>
+        HTML
+      end
     end
 
     class FormBuilderInputFieldsTest < FormBuilderTestBase
@@ -142,6 +154,102 @@ module BulmaPhlex
 
         assert_match(/placeholder="Enter name"/, html)
         assert_match(/class="input is-large"/, html)
+      end
+    end
+
+    class FormBuilderInputIconTest < FormBuilderTestBase
+      def test_text_field_renders_with_label_and_control
+        html = @form.text_field(:name, icon_left: "fas fa-user")
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <label class="label" for="test_model_name">Name</label>
+            <div class="control has-icons-left">
+              <input class="input" type="text" value="John Doe" name="test_model[name]" id="test_model_name" />
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+            </div>
+          </div>
+        HTML
+      end
+    end
+
+    class FormBuilderColumnsTest < FormBuilderTestBase
+      def test_columns_wraps_fields_in_columns_div
+        html = @form.columns do
+          @form.text_field(:name) +
+            @form.email_field(:email, column: "two-thirds")
+        end
+
+        assert_html_equal <<~HTML, html
+          <div class="columns">
+            <div class = "field column">
+              <label class="label" for="test_model_name">Name</label>
+              <div class="control">
+                <input class="input" type="text" value="John Doe" name="test_model[name]" id="test_model_name" />
+              </div>
+            </div>
+            <div class = "field column is-two-thirds">
+              <label class="label" for="test_model_email">Email</label>
+              <div class="control">
+                <input class="input" type="email" value="john@example.com" name="test_model[email]" id="test_model_email" />
+              </div>
+            </div>
+          </div>
+        HTML
+      end
+    end
+
+    class FormBuilderGridTest < FormBuilderTestBase
+      def test_grid_wraps_fields_in_grid_div
+        html = @form.grid do
+          @form.text_field(:name) +
+            @form.email_field(:email, grid: "col-span-3")
+        end
+
+        assert_html_equal <<~HTML, html
+          <div class="grid">
+            <div class = "field cell">
+              <label class="label" for="test_model_name">Name</label>
+              <div class="control">
+                <input class="input" type="text" value="John Doe" name="test_model[name]" id="test_model_name" />
+              </div>
+            </div>
+            <div class = "field cell is-col-span-3">
+              <label class="label" for="test_model_email">Email</label>
+              <div class="control">
+                <input class="input" type="email" value="john@example.com" name="test_model[email]" id="test_model_email" />
+              </div>
+            </div>
+          </div>
+        HTML
+      end
+
+      def test_fixed_grid_wraps_fields_in_fixed_grid_div
+        html = @form.fixed_grid do
+          @form.text_field(:name) +
+            @form.email_field(:email, grid: "col-span-3")
+        end
+
+        assert_html_equal <<~HTML, html
+          <div class="fixed-grid">
+            <div class="grid">
+              <div class = "field cell">
+                <label class="label" for="test_model_name">Name</label>
+                <div class="control">
+                  <input class="input" type="text" value="John Doe" name="test_model[name]" id="test_model_name" />
+                </div>
+              </div>
+              <div class = "field cell is-col-span-3">
+                <label class="label" for="test_model_email">Email</label>
+                <div class="control">
+                  <input class="input" type="email" value="john@example.com" name="test_model[email]" id="test_model_email" />
+                </div>
+              </div>
+            </div>
+          </div>
+        HTML
       end
     end
   end
