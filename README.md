@@ -50,13 +50,13 @@ The following form helpers are supported:
 - search_field
 - color_field
 - range_field
+- select
+- collection_select
 
 The following form helpers are still under construction:
 
 - checkbox
 - checkbox_display
-- select
-- collection_select
 - file_field
 - text_area
 - textarea
