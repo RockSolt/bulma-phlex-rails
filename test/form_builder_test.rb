@@ -184,7 +184,7 @@ module BulmaPhlex
             <label class="label" for="test_model_name">Name</label>
             <div class="control">
               <div class="select">
-                <select class="" name="test_model[name]" id="test_model_name">
+                <select name="test_model[name]" id="test_model_name">
                   <option value="Option 1">Option 1</option>
                   <option value="Option 2">Option 2</option>
                 </select>
@@ -212,11 +212,26 @@ module BulmaPhlex
             <label class="label" for="test_model_name">Name</label>
             <div class="control">
               <div class="select">
-                <select class="" name="test_model[name]" id="test_model_name">
+                <select name="test_model[name]" id="test_model_name">
                   <option value="john@example.com">John Doe</option>
                   <option value="jane@example.com">Jane Doe</option>
                 </select>
               </div>
+            </div>
+          </div>
+        HTML
+      end
+    end
+
+    class FormBuilderTextareaTest < FormBuilderTestBase
+      def test_textarea
+        html = @form.textarea(:description, placeholder: "Enter description", rows: 10)
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <label class="label" for="test_model_description">Description</label>
+            <div class="control">
+              <textarea placeholder="Enter description" rows="10" class="textarea" name="test_model[description]" id="test_model_description" />
             </div>
           </div>
         HTML

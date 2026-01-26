@@ -30,6 +30,9 @@ module BulmaPhlex
       def number_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
       def range_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
 
+      def textarea(method, **options) = wrap_field(method, options, add_class: "textarea") { |m, opts| super(m, opts) }
+      alias text_area textarea
+
       def select(method, choices = nil, options = {}, html_options = {}, &)
         wrap_select_field(method, html_options) do |m, html_opts|
           super(m, choices, options, html_opts, &)
@@ -80,9 +83,9 @@ module BulmaPhlex
 
       private
 
-      def wrap_field(method, options, &delivered)
+      def wrap_field(method, options, add_class: "input", &delivered)
         options = options.dup
-        options[:class] = Array.wrap(options[:class]) << "input" # select assumes input is last element
+        options[:class] = Array.wrap(options[:class]) << add_class if add_class
 
         form_field_options = options.extract!(:icon_left, :icon_right, :column, :grid)
                                     .with_defaults(column: @columns_flag, grid: @grid_flag)
@@ -96,9 +99,8 @@ module BulmaPhlex
       end
 
       def wrap_select_field(method, html_options, &delivered)
-        wrap_field(method, html_options) do |m, html_opts|
+        wrap_field(method, html_options, add_class: false) do |m, html_opts|
           @template.content_tag(:div, class: "select") do
-            html_opts[:class].pop # Remove 'input' class added by wrap_field
             delivered.call(m, html_opts)
           end
         end
