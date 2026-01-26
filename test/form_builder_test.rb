@@ -184,7 +184,7 @@ module BulmaPhlex
             <label class="label" for="test_model_name">Name</label>
             <div class="control">
               <div class="select">
-                <select class="" name="test_model[name]" id="test_model_name">
+                <select name="test_model[name]" id="test_model_name">
                   <option value="Option 1">Option 1</option>
                   <option value="Option 2">Option 2</option>
                 </select>
@@ -212,7 +212,7 @@ module BulmaPhlex
             <label class="label" for="test_model_name">Name</label>
             <div class="control">
               <div class="select">
-                <select class="" name="test_model[name]" id="test_model_name">
+                <select name="test_model[name]" id="test_model_name">
                   <option value="john@example.com">John Doe</option>
                   <option value="jane@example.com">Jane Doe</option>
                 </select>
