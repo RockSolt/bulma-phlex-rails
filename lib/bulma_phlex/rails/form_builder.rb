@@ -31,21 +31,15 @@ module BulmaPhlex
       def range_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
 
       def select(method, choices = nil, options = {}, html_options = {}, &)
-        wrap_field(method, html_options) do |m, html_opts|
-          @template.content_tag(:div, class: "select") do
-            html_opts[:class].pop # Remove 'input' class added by wrap_field
-            super(m, choices, options, html_opts, &)
-          end
+        wrap_select_field(method, html_options) do |m, html_opts|
+          super(m, choices, options, html_opts, &)
         end
       end
 
       # rubocop:disable Metrics/ParameterLists
       def collection_select(method, collection, value_method, text_method, options = {}, html_options = {})
-        wrap_field(method, html_options) do |m, html_opts|
-          @template.content_tag(:div, class: "select") do
-            html_opts[:class].pop # Remove 'input' class added by wrap_field
-            super(m, collection, value_method, text_method, options, html_opts)
-          end
+        wrap_select_field(method, html_options) do |m, html_opts|
+          super(m, collection, value_method, text_method, options, html_opts)
         end
       end
       # rubocop:enable Metrics/ParameterLists
@@ -99,6 +93,15 @@ module BulmaPhlex
         end
 
         form_field.render_in(@template)
+      end
+
+      def wrap_select_field(method, html_options, &delivered)
+        wrap_field(method, html_options) do |m, html_opts|
+          @template.content_tag(:div, class: "select") do
+            html_opts[:class].pop # Remove 'input' class added by wrap_field
+            delivered.call(m, html_opts)
+          end
+        end
       end
     end
   end
