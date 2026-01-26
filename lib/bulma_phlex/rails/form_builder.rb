@@ -33,6 +33,14 @@ module BulmaPhlex
       def textarea(method, **options) = wrap_field(method, options, add_class: "textarea") { |m, opts| super(m, opts) }
       alias text_area textarea
 
+      # Override label to add Bulma's `label` class by default. Add `:skip_label_class` option
+      # to skip adding the class.
+      def label(method, text = nil, options = {}, &)
+        skip_label_class = options.delete(:skip_label_class)
+        options[:class] = Array.wrap(options[:class]) << :label unless skip_label_class
+        super
+      end
+
       def select(method, choices = nil, options = {}, html_options = {}, &)
         wrap_select_field(method, html_options) do |m, html_opts|
           super(m, choices, options, html_opts, &)
@@ -91,7 +99,7 @@ module BulmaPhlex
                                     .with_defaults(column: @columns_flag, grid: @grid_flag)
 
         form_field = FormField.new(**form_field_options) do |f|
-          f.label { label(method, class: "label").html_safe } unless options.delete(:suppress_label)
+          f.label { label(method).html_safe } unless options.delete(:suppress_label)
           f.control { delivered.call(method, options) }
         end
 
