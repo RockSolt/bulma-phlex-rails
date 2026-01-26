@@ -238,6 +238,24 @@ module BulmaPhlex
       end
     end
 
+    class FormBuilderLabelTest < FormBuilderTestBase
+      def test_label
+        html = @form.label(:name)
+
+        assert_html_equal <<~HTML, html
+          <label class="label" for="test_model_name">Name</label>
+        HTML
+      end
+
+      def test_label_with_no_label_class
+        html = @form.label(:name, "Full Name", skip_label_class: true)
+
+        assert_html_equal <<~HTML, html
+          <label for="test_model_name">Full Name</label>
+        HTML
+      end
+    end
+
     class FormBuilderColumnsTest < FormBuilderTestBase
       def test_columns_wraps_fields_in_columns_div
         html = @form.columns do
