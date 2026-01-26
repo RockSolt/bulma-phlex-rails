@@ -1,4 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/bulma-phlex-rails.svg)](https://badge.fury.io/rb/bulma-phlex-rails)
+[![Tests](https://github.com/RockSolt/bulma-phlex-rails/actions/workflows/test.yml/badge.svg)](https://github.com/RockSolt/bulma-phlex-rails/actions/workflows/test.yml)
+[![RuboCop](https://github.com/RockSolt/bulma-phlex-rails/actions/workflows/rubocop.yml/badge.svg)](https://github.com/RockSolt/bulma-phlex-rails/actions/workflows/rubocop.yml)
 
 # Bulma Phlex Rails
 
