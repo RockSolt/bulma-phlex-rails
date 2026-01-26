@@ -30,6 +30,9 @@ module BulmaPhlex
       def number_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
       def range_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
 
+      def textarea(method, **options) = wrap_field(method, options, add_class: "textarea") { |m, opts| super(m, opts) }
+      alias text_area textarea
+
       def select(method, choices = nil, options = {}, html_options = {}, &)
         wrap_select_field(method, html_options) do |m, html_opts|
           super(m, choices, options, html_opts, &)

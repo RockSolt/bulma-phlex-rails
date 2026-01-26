@@ -223,6 +223,21 @@ module BulmaPhlex
       end
     end
 
+    class FormBuilderTextareaTest < FormBuilderTestBase
+      def test_textarea
+        html = @form.textarea(:description, placeholder: "Enter description", rows: 10)
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <label class="label" for="test_model_description">Description</label>
+            <div class="control">
+              <textarea placeholder="Enter description" rows="10" class="textarea" name="test_model[description]" id="test_model_description" />
+            </div>
+          </div>
+        HTML
+      end
+    end
+
     class FormBuilderColumnsTest < FormBuilderTestBase
       def test_columns_wraps_fields_in_columns_div
         html = @form.columns do
