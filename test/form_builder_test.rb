@@ -153,7 +153,7 @@ module BulmaPhlex
         html = @form.text_field(:name, class: "is-large", placeholder: "Enter name")
 
         assert_match(/placeholder="Enter name"/, html)
-        assert_match(/class="input is-large"/, html)
+        assert_match(/class="is-large input"/, html)
       end
     end
 
@@ -169,6 +169,54 @@ module BulmaPhlex
               <span class="icon is-small is-left">
                 <i class="fas fa-user"></i>
               </span>
+            </div>
+          </div>
+        HTML
+      end
+    end
+
+    class FormBuilderSelectTest < FormBuilderTestBase
+      def test_select_renders_with_label_and_control
+        html = @form.select(:name, ["Option 1", "Option 2"])
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <label class="label" for="test_model_name">Name</label>
+            <div class="control">
+              <div class="select">
+                <select class="" name="test_model[name]" id="test_model_name">
+                  <option value="Option 1">Option 1</option>
+                  <option value="Option 2">Option 2</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        HTML
+      end
+    end
+
+    class FormBuilderCollectionSelectTest < FormBuilderTestBase
+      def setup
+        super
+        @collection = [
+          @model,
+          TestModel.new(name: "Jane Doe", email: "jane@example.com")
+        ]
+      end
+
+      def test_collection_select_renders_with_label_and_control
+        html = @form.collection_select(:name, @collection, :email, :name)
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <label class="label" for="test_model_name">Name</label>
+            <div class="control">
+              <div class="select">
+                <select class="" name="test_model[name]" id="test_model_name">
+                  <option value="john@example.com">John Doe</option>
+                  <option value="jane@example.com">Jane Doe</option>
+                </select>
+              </div>
             </div>
           </div>
         HTML
