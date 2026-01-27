@@ -256,6 +256,32 @@ module BulmaPhlex
       end
     end
 
+    class FormBuilderSubmitTest < FormBuilderTestBase
+      def test_submit
+        html = @form.submit
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <div class="control">
+              <input type="submit" name="commit" value="Create Test model" class="button" data-disable-with="Create Test model">
+            </div>
+          </div>
+        HTML
+      end
+
+      def test_submit_with_value_and_options
+        html = @form.submit("Save", class: "is-primary")
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <div class="control">
+              <input type="submit" name="commit" value="Save" class="is-primary button" data-disable-with="Save">
+            </div>
+          </div>
+        HTML
+      end
+    end
+
     class FormBuilderColumnsTest < FormBuilderTestBase
       def test_columns_wraps_fields_in_columns_div
         html = @form.columns do
