@@ -55,6 +55,15 @@ module BulmaPhlex
       end
       # rubocop:enable Metrics/ParameterLists
 
+      def submit(value = nil, options = {})
+        options = options.dup
+        options[:class] = Array.wrap(options[:class]) << :button
+
+        FormField.new do |field|
+          field.control { super(value, options) }
+        end.render_in(@template)
+      end
+
       # Fields declared in a column block will be wrapped in a Bulma column and carry
       # the `column` class by default (fields can use the `column` option to set sizes).
       def columns(min_breakpoint = nil, &)
