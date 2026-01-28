@@ -104,7 +104,7 @@ module BulmaPhlex
         options = options.dup
         options[:class] = Array.wrap(options[:class]) << add_class if add_class
 
-        form_field_options = options.extract!(:icon_left, :icon_right, :column, :grid)
+        form_field_options = options.extract!(:help, :icon_left, :icon_right, :column, :grid)
                                     .with_defaults(column: @columns_flag, grid: @grid_flag)
 
         form_field = FormField.new(**form_field_options) do |f|

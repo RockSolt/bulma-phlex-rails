@@ -155,6 +155,20 @@ module BulmaPhlex
         assert_match(/placeholder="Enter name"/, html)
         assert_match(/class="is-large input"/, html)
       end
+
+      def test_field_with_help
+        html = @form.text_field(:name, help: "This is your full name")
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <label class="label" for="test_model_name">Name</label>
+            <div class="control">
+              <input class="input" type="text" value="John Doe" name="test_model[name]" id="test_model_name" />
+            </div>
+            <p class="help">This is your full name</p>
+          </div>
+        HTML
+      end
     end
 
     class FormBuilderInputIconTest < FormBuilderTestBase
