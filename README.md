@@ -6,13 +6,8 @@
 
 Build Rails applications with the power of Phlex and the elegance of Bulma CSS framework. Use Bulma components and a Rails form builder to create clean, responsive applications.
 
-> [!IMPORTANT]
-> The Form Builder is still under development. The documentation below describes the planned functionality. See the issues list for progress.
->
-> The BulmaPhlex components, with the Rails extensions as well as the related Stimulus controllers, are available now.
 
-
-## Form Builder–Coming Soon!
+## Form Builder
 
 The custom form builder that simplifies the process of creating forms with Bulma styles. It overrides the form helpers to generate Bulma-compatible HTML.
 
@@ -33,34 +28,16 @@ It generates the following HTML (assuming a form object for a Project model):
 </div>
 ```
 
-The following form helpers are supported:
+All of the standard Rails form helpers are supported. Under the hood the form builder still uses Rails form helpers, so all standard options are supported as well and you get the full power of Rails forms.
 
-- text_field
-- password_field
-- telephone_field
-- date_field
-- time_field
-- datetime_field
-- datetime_local_field
-- week_field
-- month_field
-- url_field
-- email_field
-- number_field
-- search_field
-- color_field
-- range_field
-- select
-- collection_select
+> [!NOTE]
+> The following form helpers are still under construction:
+>
+> - collection_checkboxes
+> - collection_radio_buttons
+> - file_field
+> - radio_button
 
-The following form helpers are still under construction:
-
-- checkbox
-- checkbox_display
-- file_field
-- text_area
-- textarea
-- submit_tag
 
 In addition to the standard options, the following options are supported for inputs:
 
@@ -70,14 +47,22 @@ In addition to the standard options, the following options are supported for inp
 - column: Specify Bulma column classes for responsive layouts
 - cell: Specify Bulma grid cell classes for responsive layouts
 
-For example, want your amount input to include a dollar sign icon?
+For example, want your name field to include a user icon?
 
 ```ruby
-form.text_field :amount, icon_left: "dollar-sign"
+form.text_field :name, icon_left: "fas fa-user"
 ```
 
-> [!NOTE]
-> Under the hood the form builder still uses Rails form helpers, so all standard options are supported as well and you get the full power of Rails forms.
+#### Checkbox
+
+The checkbox method on the Form Builder generates a Bulma-styled checkbox input. If the label needs to be HTML instead of plain text, pass a block to the method.
+
+```ruby
+form.checkbox :terms_of_service do
+  span { "I agree to the " }
+  a(href: '/terms') { 'the Terms' }
+end
+```
 
 ### Columns and Grids
 
@@ -151,7 +136,10 @@ end
 
 All of the power of Bulma columns and grids are at your fingertips with an easy-to-use, Rails-friendly API.
 
-### Form Addons and Groups
+### Form Addons and Groups--Coming Soon!
+
+> [!IMPORTANT]
+> This feature has not yet been implemented.
 
 Bulma can [attach inputs, buttons, and dropdowns](https://bulma.io/documentation/form/general/#form-addons) or [group controls together](https://bulma.io/documentation/form/general/#form-group). Helper methods make those easy, too.
 

@@ -11,7 +11,7 @@ module BulmaPhlex
       class TestModel
         include ActiveModel::Model
 
-        attr_accessor :name, :email, :password, :description
+        attr_accessor :name, :email, :password, :description, :active
 
         def self.model_name
           ActiveModel::Name.new(self, nil, "TestModel")
@@ -19,7 +19,7 @@ module BulmaPhlex
       end
 
       def setup
-        @model = TestModel.new(name: "John Doe", email: "john@example.com")
+        @model = TestModel.new(name: "John Doe", email: "john@example.com", active: true)
         @form = FormBuilder.new(
           :test_model,
           @model,
@@ -266,6 +266,25 @@ module BulmaPhlex
 
         assert_html_equal <<~HTML, html
           <label for="test_model_name">Full Name</label>
+        HTML
+      end
+    end
+
+    class FormBuilderCheckboxTest < FormBuilderTestBase
+      def test_checkbox
+        html = @form.check_box(:active)
+
+        # it shows translation missing since we have no i18n setup in the test
+        assert_html_equal <<~HTML, html
+          <div class="field">
+            <div class="control">
+              <label class="checkbox" for="test_model_active">
+                <input name="test_model[active]" type="hidden" value="0" autocomplete="off">
+                <input class="mr-2" type="checkbox" value="1" checked="checked" name="test_model[active]" id="test_model_active">
+                Active
+              </label>
+            </div>
+          </div>
         HTML
       end
     end

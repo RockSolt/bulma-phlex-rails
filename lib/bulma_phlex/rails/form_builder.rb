@@ -13,6 +13,8 @@ module BulmaPhlex
     # - `column`: If true, the input will be wrapped in a Bulma column (only within a `columns` block).
     # - `grid`: If true, the input will be wrapped in a Bulma grid cell (only within a `grid` block).
     class FormBuilder < ActionView::Helpers::FormBuilder
+      attr_reader :columns_flag, :grid_flag
+
       def text_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
       def password_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
       def color_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
@@ -32,6 +34,12 @@ module BulmaPhlex
 
       def textarea(method, **options) = wrap_field(method, options, add_class: "textarea") { |m, opts| super(m, opts) }
       alias text_area textarea
+
+      def checkbox(method, options = {}, checked_value = "1", unchecked_value = "0", &label_block)
+        delivered = ->(opts) { super(method, opts, checked_value, unchecked_value) }
+        Checkbox.new(self, method, options, delivered, label_block).render_in(@template)
+      end
+      alias check_box checkbox
 
       # Override label to add Bulma's `label` class by default. Add `:skip_label_class` option
       # to skip adding the class.
