@@ -15,24 +15,28 @@ module BulmaPhlex
     class FormBuilder < ActionView::Helpers::FormBuilder
       attr_reader :columns_flag, :grid_flag
 
-      def text_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def password_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def color_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def search_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def telephone_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def phone_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def date_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def time_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def datetime_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def datetime_local_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def month_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def week_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def url_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def email_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def number_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
-      def range_field(method, **options) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def text_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def password_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def color_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def search_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def telephone_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def phone_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def date_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def time_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def datetime_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def datetime_local_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def month_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def week_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def url_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def email_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def number_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
+      def range_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
 
-      def textarea(method, **options) = wrap_field(method, options, add_class: "textarea") { |m, opts| super(m, opts) }
+      def textarea(method, options = {})
+        wrap_field(method, options, add_class: "textarea") do |m, opts|
+          super(m, opts)
+        end
+      end
       alias text_area textarea
 
       def checkbox(method, options = {}, checked_value = "1", unchecked_value = "0", &label_block)
