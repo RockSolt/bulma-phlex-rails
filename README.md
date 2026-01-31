@@ -4,8 +4,8 @@
 
 # Bulma Phlex Rails
 
-Build Rails applications with the power of Phlex and the elegance of Bulma CSS framework. Use Bulma components and a Rails form builder to create clean, responsive applications.
-
+Simplify the view layer with a component library built on Phlex and styled with Bulma CSS framework. The code is simple
+and the UI is clean.
 
 ## Form Builder
 
@@ -156,6 +156,74 @@ form.group do
   form.text_field :last_name, placeholder: "Last Name"
 end
 ```
+
+## Display Components and Helpers
+
+The utilities and clean look of forms is also available for displaying data. The Phlex mixin `BulmaPhlex::Rails::DisplayableFormFields` makes it easy to show and organize fields.
+
+```ruby
+with_options model: invoice do
+  in_columns do
+    show_text :customer_name
+    show_date :invoice_date
+    show_text :number
+    show_amount :amount
+  end
+
+  in_columns do
+    show_text :notes, column: "three-quarters"
+    show_text :payment_status, &:titleize
+  end
+end
+```
+
+### Show Text
+
+Method `show_text` renders a label and read-only input field for displaying text data. An optional block can be provided to format the value.
+
+#### Arguments
+
+- `model`: ActiveRecord Model - The model containing the text attribute. This can also be passed
+  via the `options` (helpful when using `with_options`).
+- `method`: Symbol or String - The attribute method name for the text field.
+- `options`: Hash - Additional Bulma form field options can be passed, such as `:help`, `:icon_left`, `:icon_right`,
+  `:column`, and `:grid`.
+
+
+### Show Date
+
+Method `show_text` renders a label and read-only date field. An optional `format` key can be provided with the options to specify the date format. This is passed to the Rails `to_fs` method.
+
+#### Arguments
+
+- `model`: ActiveRecord Model - The model containing the date attribute. This can also be passed
+  via the `options` (helpful when using `with_options`).
+- `method`: Symbol or String - The attribute method name for the date field.
+- `options`: Hash - Additional options for the display field. This can include the `format` key, which gets to the Rails `to_fs` method.
+
+
+### Show Currency
+
+Method `show_currency` renders a label and read-only currency field. An optional `currency_options` key can be provided with the options. It is passed to the Rails `number_to_currency` helper method.
+
+#### Arguments
+
+- `model`: ActiveRecord Model - The model containing the currency attribute. This can also be passed
+  via the `options` (helpful when using `with_options`).
+- `method`: Symbol or String - The attribute method name for the currency field.
+- `options`: Hash - Additional options for the display field. This can include the
+  `currency_options` key, which should be a hash of options passed to `number_to_currency`.
+
+
+### Columns
+
+Method `in_columns` creates a Bulma columns container for organizing display fields. Individual fields can optionally specify their column sizes via the `column` option.
+
+
+### Grids
+
+Method `in_grid` creates a Bulma grid container for organizing display fields. Individual fields can optionally specify their grid cell sizes via the `grid` option.
+
 
 ## Bulma Components
 
