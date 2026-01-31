@@ -6,6 +6,10 @@ Lint/MissingSuper:
   Exclude:
     - lib/bulma_phlex/rails/components/**/*.rb
 
+Metrics/ClassLength:
+  Exclude:
+    - test/**/*_test.rb
+
 Metrics/MethodLength:
   Exclude:
     - test/**/*_test.rb
