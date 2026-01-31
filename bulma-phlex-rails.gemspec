@@ -8,8 +8,9 @@ Gem::Specification.new do |spec|
   spec.authors = ["Todd Kummer"]
   spec.email = ["todd@rockridgesolutions.com"]
 
-  spec.summary = "Bulma-friendly form builder built with Phlex for Rails applications."
-  spec.description = "Create forms with Bulma CSS framework styles using Phlex components in your Rails applications."
+  spec.summary = <<~SUMMARY
+    Simplify the view layer with a component library built on Phlex and styled with Bulma CSS framework. The code is simple and the UI is clean.
+  SUMMARY
   spec.homepage = "https://github.com/RockSolt/bulma-phlex-rails"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.4"

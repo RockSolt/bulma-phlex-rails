@@ -66,7 +66,7 @@ module BulmaPhlex
       # Display a currency field in a read-only Bulma-styled format. Include a `currency_format` option
       # to customize the currency format, which will be passed to Rails' `number_to_currency` helper.
       #
-      # #### Options
+      # #### Arguments
       #
       # - `model`: ActiveRecord Model - The model containing the currency attribute. This can also be passed
       #   via the `options` (helpful when using `with_options`).
@@ -86,12 +86,13 @@ module BulmaPhlex
       # to customize the date format, which will be passed to `to_fs`.
       # Defaults to `:long` format.
       #
-      # #### Options
+      # #### Arguments
       #
       # - `model`: ActiveRecord Model - The model containing the date attribute. This can also be passed
       #   via the `options` (helpful when using `with_options`).
       # - `method`: Symbol or String - The attribute method name for the date field.
-      # - `format`: Symbol or String - The date format to use, passed to `to_fs`. Defaults to `:long`.
+      # - `options`: Hash - Additional options for the display field. This can include the `format` key, which gets
+      #    passed to `to_fs`.
       #
       # #### Example
       #
@@ -107,7 +108,7 @@ module BulmaPhlex
       # Display a text field in a read-only Bulma-styled format. A custom formatter
       # block can be provided to modify the displayed text.
       #
-      # #### Options
+      # #### Arguments
       # - `model`: ActiveRecord Model - The model containing the text attribute. This can also be passed
       #   via the `options` (helpful when using `with_options`).
       # - `method`: Symbol or String - The attribute method name for the text field.
