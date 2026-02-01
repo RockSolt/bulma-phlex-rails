@@ -10,58 +10,11 @@ module BulmaPhlex
     #
     # #### Included Methods
     #
-    # - `with_options` - Wrap a block with specific options for displayable fields.
-    # - `in_columns` - Wrap a block to display fields in Bulma columns.
-    # - `in_grid` - Wrap a block to display fields in a Bulma grid.
     # - `show_currency` - Display a currency field in a read-only Bulma-styled format.
     # - `show_date` - Display a date field in a read-only Bulma-styled format.
     # - `show_text` - Display a text field in a read
     module DisplayableFormFields
-      # Wrap a block with specific options for displayable fields. This allows redundant
-      # options to be specified once for multiple fields. These options are merged with
-      # any options passed directly to the individual field methods.
-      #
-      # If the `:column` or `:grid` option is provided, the block will be wrapped
-      # in a Bulma `columns` or `grid` container, respectively.
-      #
-      # Blocks can be nested, with inner block options overriding outer block options.
-      #
-      # #### Example
-      #
-      #     with_options(model: @user, column: true) do
-      #       show_text(:username)
-      #       show_date(birthdate, format: :short)
-      #     end
-      def with_options(**block_options, &)
-        (@block_options_stack ||= []) << @block_options
-        @block_options = (@block_options || {}).merge(block_options)
-
-        if @block_options[:column]
-          div(class: "columns", &)
-        elsif @block_options[:grid]
-          div(class: "grid", &)
-        else
-          yield
-        end
-
-        @block_options = @block_options_stack.pop
-      end
-
-      # Wrap a block to display fields in Bulma columns. This adds a columns container
-      # and sets the `column: true` option for any `show_` fields within the block.
-      #
-      # This is a shorthand for `with_options(column: true) do`.
-      def in_columns(&)
-        with_options(column: true, &)
-      end
-
-      # Wrap a block to display fields in a Bulma grid. This adds a grid container
-      # and sets the `grid: true` option for any `show_` fields within the block.
-      #
-      # This is a shorthand for `with_options(grid: true) do`.
-      def in_grid(&)
-        with_options(grid: true, &)
-      end
+      include BulmaPhlex::Rails::DisplayableBlockOptions
 
       # Display a currency field in a read-only Bulma-styled format. Include a `currency_format` option
       # to customize the currency format, which will be passed to Rails' `number_to_currency` helper.
@@ -79,7 +32,8 @@ module BulmaPhlex
       #     show_currency(@order, :total_amount)
       #     show_currency(@product, :price, currency_options: { unit: "€", precision: 2 })
       def show_currency(model, method = nil, **options)
-        render BulmaPhlex::Rails::CurrencyDisplay.new(model, method, **options.with_defaults(@block_options || {}))
+        render BulmaPhlex::Rails::CurrencyDisplay.new(model, method,
+                                                      **options.with_defaults(block_display_options))
       end
 
       # Display a date field in a read-only Bulma-styled format. Include a `format` option
@@ -101,7 +55,7 @@ module BulmaPhlex
       #     show_date(:scheduled_at, model: @appointment, format: "%B %d, %Y")
       def show_date(model, method = nil, **options)
         date_options = options.with_defaults(format: :long)
-                              .with_defaults(@block_options || {})
+                              .with_defaults(block_display_options)
         render BulmaPhlex::Rails::FormattedDisplay.new(model, method, **date_options)
       end
 
@@ -121,7 +75,7 @@ module BulmaPhlex
       #     show_text(@article, :title, &:titleize)
       #     show_text(:email, model: @contact, help: "Primary contact email")
       def show_text(model, method = nil, **options, &formatter)
-        text_options = options.with_defaults(@block_options || {})
+        text_options = options.with_defaults(block_display_options)
         render BulmaPhlex::Rails::TextDisplay.new(model, method, **text_options, formatter: formatter)
       end
     end
