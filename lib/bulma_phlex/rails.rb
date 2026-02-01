@@ -16,6 +16,7 @@ loader.collapse("#{__dir__}/rails/components")
 loader.collapse("#{__dir__}/rails/components/displays")
 loader.collapse("#{__dir__}/rails/concerns")
 loader.collapse("#{__dir__}/rails/helpers")
+loader.collapse("#{__dir__}/rails/models")
 loader.setup
 
 require "bulma_phlex/rails/engine"
