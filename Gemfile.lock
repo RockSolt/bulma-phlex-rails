@@ -3,7 +3,7 @@ PATH
   specs:
     bulma-phlex-rails (0.4.0)
       actionpack (>= 7.2)
-      bulma-phlex (>= 0.9.0)
+      bulma-phlex (>= 0.10.0)
       phlex-rails (>= 2.3)
       railties (>= 7.2)
 
@@ -45,7 +45,7 @@ GEM
     base64 (0.3.0)
     bigdecimal (3.3.1)
     builder (3.3.0)
-    bulma-phlex (0.9.0)
+    bulma-phlex (0.10.0)
       phlex (>= 2.0.2)
     concurrent-ruby (1.3.5)
     connection_pool (3.0.2)

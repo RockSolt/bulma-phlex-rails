@@ -166,6 +166,34 @@ module BulmaPhlex
         HTML
       end
 
+      def test_in_grid_with_options
+        component = Class.new(TestComponent) do
+          def view_template
+            in_grid(id: "my-grid", minimum_column_width: 6) do
+              show_text @model, :name
+              show_date @model, :start_date
+            end
+          end
+        end.new(@model)
+
+        assert_html_equal <<~HTML, render(component)
+          <div class="grid is-col-min-6" id="my-grid">
+            <div class="field cell">
+              <label class="label">Name</label>
+              <div class="control">
+                <input type="text" class="input is-light" type="text" value="Sample Text" readonly />
+              </div>
+            </div>
+            <div class="field cell">
+              <label class="label">Start date</label>
+              <div class="control">
+                <input type="text" class="input is-light" type="text" value="July 06, 1976" readonly />
+              </div>
+            </div>
+          </div>
+        HTML
+      end
+
       def test_with_options_handles_model
         component = Class.new(TestComponent) do
           def view_template
