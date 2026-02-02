@@ -25,7 +25,7 @@ module BulmaPhlex
         end
 
         assert 1, @div_args.size
-        assert_equal({ class: "columns" }, @div_args.first)
+        assert_instance_of BulmaPhlex::Columns, @components.first
       end
 
       def test_in_grid
@@ -47,11 +47,6 @@ module BulmaPhlex
       end
 
       private
-
-      # mock div method to capture arguments
-      def div(**args, &)
-        @div_args << args
-      end
 
       def render(component)
         @components << component

@@ -33,7 +33,7 @@ module BulmaPhlex
         (@_block_display_options ||= BlockDisplayOptions.new).push(block_options)
 
         if @_block_display_options.column?
-          div(class: "columns", &)
+          render BulmaPhlex::Columns.new(**@_block_display_options.column_options, &)
         elsif @_block_display_options.grid?
           render BulmaPhlex::Grid.new(**@_block_display_options.grid_options, &)
         else
@@ -52,8 +52,8 @@ module BulmaPhlex
       # and sets the `column: true` option for any `show_` fields within the block.
       #
       # This is a shorthand for `with_options(column: true) do`.
-      def in_columns(&)
-        with_options(columns: true, &)
+      def in_columns(options = true, &) # rubocop:disable Style/OptionalBooleanParameter
+        with_options(columns: options, &)
       end
 
       # Wrap a block to display fields in a Bulma grid. This adds a grid container
