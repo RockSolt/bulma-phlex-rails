@@ -35,12 +35,10 @@ module BulmaPhlex
       end
 
       def view_template
-        render FormField.new(**@form_field_options) do |f|
-          f.control do
-            @form_builder.label(@method, nil, class: "checkbox", skip_label_class: true) do |label_builder|
-              raw @delivered.call(@options)
-              render_label(label_builder)
-            end
+        render FormField.new(**@form_field_options) do
+          @form_builder.label(@method, nil, class: "checkbox", skip_label_class: true) do |label_builder|
+            raw @delivered.call(@options)
+            render_label(label_builder)
           end
         end
       end

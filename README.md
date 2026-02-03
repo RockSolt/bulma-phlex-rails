@@ -36,7 +36,6 @@ All of the standard Rails form helpers are supported. Under the hood the form bu
 > - collection_checkboxes
 > - collection_radio_buttons
 > - file_field
-> - radio_button
 
 
 In addition to the standard options, the following options are supported for inputs:
