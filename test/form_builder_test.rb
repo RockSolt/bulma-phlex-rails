@@ -274,7 +274,6 @@ module BulmaPhlex
       def test_checkbox
         html = @form.check_box(:active)
 
-        # it shows translation missing since we have no i18n setup in the test
         assert_html_equal <<~HTML, html
           <div class="field">
             <div class="control">
@@ -282,6 +281,23 @@ module BulmaPhlex
                 <input name="test_model[active]" type="hidden" value="0" autocomplete="off">
                 <input class="mr-2" type="checkbox" value="1" checked="checked" name="test_model[active]" id="test_model_active">
                 Active
+              </label>
+            </div>
+          </div>
+        HTML
+      end
+    end
+
+    class FormBuilderRadioButtonTest < FormBuilderTestBase
+      def test_radio_button
+        html = @form.radio_button(:active, true)
+
+        assert_html_equal <<~HTML, html
+          <div class="field">
+            <div class="control">
+              <label class="radio">
+                <input class="mr-2" type="radio" value="true" checked="checked" name="test_model[active]" id="test_model_active_true" />
+                True
               </label>
             </div>
           </div>

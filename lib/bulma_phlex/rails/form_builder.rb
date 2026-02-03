@@ -45,6 +45,11 @@ module BulmaPhlex
       end
       alias check_box checkbox
 
+      def radio_button(method, tag_value, options = {})
+        delivered = ->(opts) { super(method, tag_value, opts) }
+        RadioButton.new(self, method, tag_value, options, delivered).render_in(@template)
+      end
+
       # Override label to add Bulma's `label` class by default. Add `:skip_label_class` option
       # to skip adding the class.
       def label(method, text = nil, options = {}, &)
