@@ -2,7 +2,21 @@
 
 module BulmaPhlex
   module Rails
-    # # Checkbox Component
+    # # Radio Button Component
+    #
+    # This component renders a Bulma-styled radio button within a form. It integrates with Rails' form builder
+    # to ensure proper labeling and value handling.
+    #
+    # The label is looked up using I18n based on the method and tag value. The key is the combination of the
+    # method name and the tag value, formatted as `method_tagvalue`, under the scope `helpers.label.object_name`.
+    # If no translation is found, it defaults to a humanized version of the tag value.
+    #
+    # Example usage:
+    # ```ruby
+    # form_with model: @project do |f|
+    #  f.radio_button :status, "active"
+    #  f.radio_button :status, "archived"
+    # end
     class RadioButton < BulmaPhlex::Base
       def initialize(form_builder, method, tag_value, options, delivered)
         @form_builder = form_builder
