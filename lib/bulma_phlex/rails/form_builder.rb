@@ -83,36 +83,55 @@ module BulmaPhlex
 
       # Fields declared in a column block will be wrapped in a Bulma column and carry
       # the `column` class by default (fields can use the `column` option to set sizes).
-      def columns(min_breakpoint = nil, &)
+      #
+      # ## Arguments
+      #
+      # - `minimum_breakpoint`: (Symbol, optional) Sets the minimum breakpoint for the columns; default is `:tablet`.
+      # - `multiline`: (Boolean, optional) If true, allows the columns to wrap onto multiple lines.
+      # - `gap`: (optional) Use an integer (0-8) to set the gap size between columns; use a hash keyed by breakpoints
+      #   to set responsive gap sizes.
+      # - `centered`: (Boolean, optional) If true, centers the columns.
+      # - `vcentered`: (Boolean, optional) If true, vertically centers the columns.
+      def columns(minimum_breakpoint: nil,
+                  multiline: false,
+                  gap: nil,
+                  centered: false,
+                  vcentered: false, &)
         @columns_flag = true
         columns = @template.capture(&)
         @columns_flag = false
 
-        @template.content_tag(:div, class: [:columns, min_breakpoint]) do
+        BulmaPhlex::Columns.new(minimum_breakpoint:, multiline:, gap:, centered:, vcentered:) do
           @template.concat(columns)
-        end
-      end
-
-      # Fields declared in a fixed_grid block will be wrapped in a Bulma fixed grid and
-      # carry the `grid` class by default (fields can use the `grid` option to set sizes).
-      def fixed_grid(&)
-        # TODO: Use BulmaPhlex::FixedGrid for more options
-        @template.content_tag(:div, class: "fixed-grid") do
-          grid(&)
-        end
+        end.render_in(@template)
       end
 
       # Fields declared in a grid block will be wrapped in a Bulma fixed grid and carry
       # the `grid` class by default (fields can use the `grid` option to set sizes).
-      def grid(&)
+      #
+      # ## Arguments
+      #
+      # - `fixed_columns`: (Integer, optional) Specifies a fixed number of columns for the grid.
+      # - `auto_count`: (Boolean, optional) If true, the grid will automatically adjust the number
+      #    of columns based on the content.
+      # - `minimum_column_width`: (Integer 1-32, optional) Sets a minimum width for the columns in the grid.
+      # - `gap`: (optional) Sets the gap size between grid items from 1-8 with 0.5 increments.
+      # - `column_gap`: (optional) Sets the column gap size between grid items from 1-8 with 0.5 increments.
+      # - `row_gap`: (optional) Sets the row gap size between grid items from 1-8 with 0.5 increments.
+      def grid(fixed_columns: nil, # rubocop:disable Metrics/ParameterLists
+               auto_count: false,
+               minimum_column_width: nil,
+               gap: nil,
+               column_gap: nil,
+               row_gap: nil,
+               &)
         @grid_flag = true
         cells = @template.capture(&)
         @grid_flag = false
 
-        # TODO: Use BulmaPhlex::Grid for more options
-        @template.content_tag(:div, class: "grid") do
+        BulmaPhlex::Grid.new(fixed_columns:, auto_count:, minimum_column_width:, gap:, column_gap:, row_gap:) do
           @template.concat(cells)
-        end
+        end.render_in(@template)
       end
 
       private

@@ -382,14 +382,14 @@ module BulmaPhlex
         HTML
       end
 
-      def test_fixed_grid_wraps_fields_in_fixed_grid_div
-        html = @form.fixed_grid do
+      def test_grid_with_columns_wraps_fields_in_fixed_grid_div
+        html = @form.grid(fixed_columns: 2) do
           @form.text_field(:name) +
             @form.email_field(:email, grid: "col-span-3")
         end
 
         assert_html_equal <<~HTML, html
-          <div class="fixed-grid">
+          <div class="fixed-grid has-2-cols">
             <div class="grid">
               <div class = "field cell">
                 <label class="label" for="test_model_name">Name</label>
