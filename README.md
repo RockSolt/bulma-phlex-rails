@@ -77,7 +77,16 @@ form.columns do
 end
 ```
 
-You can also size the columns, using either the names like "half", "two-thirds", etc., or the numeric values 1-12.
+You can use the following options for the Bulma columns:
+
+- `minimum_breakpoint`: (Symbol, optional) Sets the minimum breakpoint for the columns; default is `:tablet`.
+- `multiline`: (Boolean, optional) If true, allows the columns to wrap onto multiple lines.
+- `gap`: (optional) Use an integer (0-8) to set the gap size between columns; use a hash keyed by breakpoints
+  to set responsive gap sizes.
+- `centered`: (Boolean, optional) If true, centers the columns.
+- `vcentered`: (Boolean, optional) If true, vertically centers the columns.
+
+You can also size the individual columns, using either the names like "half", "two-thirds", etc., or the numeric values 1-12.
 
 ```ruby
 form.columns do
@@ -109,25 +118,23 @@ form.grid do
 end
 ```
 
-You can still provide guidance on the grid cell sizes:
+You can use the following options for the Bulma grids:
+
+- `fixed_columns`: (Integer, optional) Specifies a fixed number of columns for the grid.
+- `auto_count`: (Boolean, optional) If true, the grid will automatically adjust the number
+   of columns based on the content.
+- `minimum_column_width`: (Integer 1-32, optional) Sets a minimum width for the columns in the grid.
+- `gap`: (optional) Sets the gap size between grid items from 1-8 with 0.5 increments.
+- `column_gap`: (optional) Sets the column gap size between grid items from 1-8 with 0.5 increments.
+- `row_gap`: (optional) Sets the row gap size between grid items from 1-8 with 0.5 increments.
+
+You can still provide guidance on the individualgrid cell sizes:
 
 ```ruby
 form.grid do
   form.telephone_field :phone, column: "col-span-2"
   form.email_field :email, column: "col-span-3"
   form.text_field :city, column: "col-span-2"
-  form.text_field :state
-  form.text_field :zip
-end
-```
-
-Or use a fixed grid to quickly create a uniform layout:
-
-```ruby
-form.fixed_grid(columns: 3) do
-  form.telephone_field :phone
-  form.email_field :email
-  form.text_field :city
   form.text_field :state
   form.text_field :zip
 end
