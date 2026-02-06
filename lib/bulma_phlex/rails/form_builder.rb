@@ -12,7 +12,15 @@ module BulmaPhlex
     # - `icon_right`: If set, the specified icon will be rendered on the right side of the input.
     # - `column`: If true, the input will be wrapped in a Bulma column (only within a `columns` block).
     # - `grid`: If true, the input will be wrapped in a Bulma grid cell (only within a `grid` block).
+    #
+    # ## Nested Forms
+    #
+    # This form builder also includes support for nested forms. Invoke the `nested_form_add_button`
+    # method to add a button that allows users to dynamically add new nested form rows. Each
+    # nested form row can include a delete button using the `nested_form_delete_button` method.
     class FormBuilder < ActionView::Helpers::FormBuilder
+      include NestedForms
+
       attr_reader :columns_flag, :grid_flag
 
       def text_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
