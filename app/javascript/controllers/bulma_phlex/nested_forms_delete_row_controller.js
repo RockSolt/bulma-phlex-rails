@@ -9,8 +9,10 @@ export default class extends Controller {
     event.preventDefault();
 
     const row = this.#surroundingRow(event);
+    const parent = row.parentElement;
     if (row) {
       row.remove();
+      this.dispatch("row-removed", { target: parent });
     }
   }
 
@@ -22,6 +24,7 @@ export default class extends Controller {
     if (destroyField) {
       destroyField.value = true;
       row.classList.add("is-hidden");
+      this.dispatch("row-marked-for-destruction", { detail: { row: row } });
     }
   }
 
