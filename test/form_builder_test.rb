@@ -329,6 +329,18 @@ module BulmaPhlex
           </div>
         HTML
       end
+
+      def test_without_value
+        html = @form.submit(class: "is-primary")
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <div class="control">
+              <input type="submit" name="commit" value="Create Test model" class="is-primary button" data-disable-with="Create Test model">
+            </div>
+          </div>
+        HTML
+      end
     end
 
     class FormBuilderColumnsTest < FormBuilderTestBase
