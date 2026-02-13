@@ -18,7 +18,7 @@ module BulmaPhlex
     # This form builder also includes support for nested forms. Invoke the `nested_form_add_button`
     # method to add a button that allows users to dynamically add new nested form rows. Each
     # nested form row can include a delete button using the `nested_form_delete_button` method.
-    class FormBuilder < ActionView::Helpers::FormBuilder
+    class FormBuilder < ActionView::Helpers::FormBuilder # rubocop:disable Metrics/ClassLength
       include NestedForms
 
       attr_reader :columns_flag, :grid_flag
@@ -81,6 +81,11 @@ module BulmaPhlex
       # rubocop:enable Metrics/ParameterLists
 
       def submit(value = nil, options = {})
+        if value.is_a?(Hash)
+          options = value
+          value = nil
+        end
+
         options = options.dup
         options[:class] = Array.wrap(options[:class]) << :button
 
