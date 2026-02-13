@@ -33,16 +33,18 @@ module BulmaPhlex
       end
 
       def view_template
-        render BulmaPhlex::FormField.new(icon_right: @icon) do
-          button(**mix({ type: "button", class: "button", data: stimulus_controller }, @html_attributes)) do
-            render BulmaPhlex::Icon(@icon_left) if @icon_left
+        render BulmaPhlex::FormField.new do
+          BulmaPhlex::Button(icon_left: @icon_left, icon_right: @icon_right, **button_html_attributes) do
             span { @label } if @label
-            render BulmaPhlex::Icon(@icon_right) if @icon_right
           end
         end
       end
 
       private
+
+      def button_html_attributes
+        mix({ type: "button", data: stimulus_controller }, @html_attributes)
+      end
 
       def stimulus_controller
         { controller: "bulma-phlex--nested-forms-delete-row",
