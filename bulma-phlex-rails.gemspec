@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   SUMMARY
   spec.homepage = "https://github.com/RockSolt/bulma-phlex-rails"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.4"
+  spec.required_ruby_version = ">= 3.2.10"
 
   spec.metadata["rubygems_mfa_required"] = "true"
   spec.metadata["homepage_uri"] = spec.homepage
