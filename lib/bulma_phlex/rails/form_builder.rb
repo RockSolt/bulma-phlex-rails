@@ -73,6 +73,27 @@ module BulmaPhlex
       end
 
       # rubocop:disable Metrics/ParameterLists
+
+      # The collection_radio_buttons method is overridden to wrap the radio buttons in a Bulma form field and
+      # apply the `radio` class to the labels. It does so by passing a block to the original method. If you
+      # pass a block this logic will be skipped.
+      #
+      # Add option `stacked: true` to stack the radio buttons vertically.
+      def collection_radio_buttons(method, collection, value_method, text_method, options = {}, html_options = {})
+        return super if block_given?
+
+        wrap_field(method, html_options, add_class: false) do |m, html_opts|
+          stacked = html_opts.delete(:stacked)
+          wrapper_opts = stacked ? {} : { class: "radios" }
+
+          @template.content_tag("div", wrapper_opts) do
+            super(m, collection, value_method, text_method, options, html_opts) do |rb|
+              rb.label(class: stacked ? "is-block" : "radio") { rb.radio_button(class: "mr-2") + rb.text }
+            end
+          end
+        end
+      end
+
       def collection_select(method, collection, value_method, text_method, options = {}, html_options = {})
         wrap_select_field(method, html_options) do |m, html_opts|
           super(m, collection, value_method, text_method, options, html_opts)
@@ -89,8 +110,8 @@ module BulmaPhlex
         options = options.dup
         options[:class] = Array.wrap(options[:class]) << :button
 
-        FormField.new do |field|
-          field.control { super(value, options) }
+        FormField.new do
+          super(value, options)
         end.render_in(@template)
       end
 

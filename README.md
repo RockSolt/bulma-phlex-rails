@@ -30,14 +30,6 @@ It generates the following HTML (assuming a form object for a Project model):
 
 All of the standard Rails form helpers are supported. Under the hood the form builder still uses Rails form helpers, so all standard options are supported as well and you get the full power of Rails forms.
 
-> [!NOTE]
-> The following form helpers are still under construction:
->
-> - collection_checkboxes
-> - collection_radio_buttons
-> - file_field
-
-
 In addition to the standard options, the following options are supported for inputs:
 
 - suppress_label: Do not render the label tag
@@ -62,6 +54,24 @@ form.checkbox :terms_of_service do
   a(href: '/terms') { 'the Terms' }
 end
 ```
+
+#### Collection Radio Buttons
+
+The `collection_radio_buttons` method wraps the radio buttons with the Bulma structure and styles including a label. Add option `stacked: true` to stack the radio buttons vertically.
+
+```ruby
+form.collection_radio_buttons(:author_id, Author.all, :id, :name_with_initial)
+```
+
+Passing a block will shortcut this logic and fallback to the delivered.
+
+
+> [!NOTE]
+> The following form helpers are still under construction:
+>
+> - collection_checkboxes
+> - file_field
+
 
 ### Columns and Grids
 
