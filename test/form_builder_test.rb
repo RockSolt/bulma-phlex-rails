@@ -305,6 +305,105 @@ module BulmaPhlex
       end
     end
 
+    class FormBuilderCollectionRadioButtonTest < FormBuilderTestBase
+      ActiveStates = Data.define(:name, :value)
+
+      def setup
+        super
+        @collection = [
+          ActiveStates.new("Active", true),
+          ActiveStates.new("Inactive", false)
+        ]
+      end
+
+      def test_collection_radio_button
+        html = @form.collection_radio_buttons(:active, @collection, :value, :name)
+
+        assert_html_equal <<~HTML, html
+          <div class="field">
+            <label class="label" for="test_model_active">Active</label>
+            <div class="control">
+              <div class="radios">
+                <input type="hidden" name="test_model[active]" value="" autocomplete="off" />
+                <label class="radio" for="test_model_active_true">
+                  <input class="mr-2" type="radio" value="true" checked="checked" name="test_model[active]" id="test_model_active_true" />
+                  Active
+                </label>
+                <label class="radio" for="test_model_active_false">
+                  <input class="mr-2" type="radio" value="false" name="test_model[active]" id="test_model_active_false" />
+                  Inactive
+                </label>
+              </div>
+            </div>
+           </div>
+        HTML
+      end
+
+      def test_with_stacked_option
+        html = @form.collection_radio_buttons(:active, @collection, :value, :name, {}, stacked: true)
+
+        assert_html_equal <<~HTML, html
+          <div class="field">
+            <label class="label" for="test_model_active">Active</label>
+            <div class="control">
+              <div>
+                <input type="hidden" name="test_model[active]" value="" autocomplete="off" />
+                <label class="is-block" for="test_model_active_true">
+                  <input class="mr-2" type="radio" value="true" checked="checked" name="test_model[active]" id="test_model_active_true" />
+                  Active
+                </label>
+                <label class="is-block" for="test_model_active_false">
+                  <input class="mr-2" type="radio" value="false" name="test_model[active]" id="test_model_active_false" />
+                  Inactive
+                </label>
+              </div>
+            </div>
+           </div>
+        HTML
+      end
+
+      def test_with_additional_html_attributes
+        html = @form.collection_radio_buttons(:active, @collection, :value, :name, {}, class: "is-primary")
+
+        assert_html_equal <<~HTML, html
+          <div class="field">
+            <label class="label" for="test_model_active">Active</label>
+            <div class="control">
+              <div class="radios">
+                <input type="hidden" name="test_model[active]" value="" autocomplete="off" />
+                <label class="radio" for="test_model_active_true">
+                  <input class="is-primary" type="radio" value="true" checked="checked" name="test_model[active]" id="test_model_active_true" />
+                  Active
+                </label>
+                <label class="radio" for="test_model_active_false">
+                  <input class="is-primary" type="radio" value="false" name="test_model[active]" id="test_model_active_false" />
+                  Inactive
+                </label>
+              </div>
+            </div>
+           </div>
+        HTML
+      end
+
+      def test_invokes_original_with_block
+        html = @form.collection_radio_buttons(:active, @collection, :value, :name) do |rb|
+          rb.label(class: "custom-radio") { rb.radio_button + rb.text }
+        end
+
+        assert_html_equal <<~HTML, html
+          <input type="hidden" name="test_model[active]" value="" autocomplete="off" />
+          <label class="custom-radio" for="test_model_active_true">
+            <input type="radio" value="true" checked="checked" name="test_model[active]" id="test_model_active_true" />
+            Active
+          </label>
+          <label class="custom-radio" for="test_model_active_false">
+            <input type="radio" value="false" name="test_model[active]" id="test_model_active_false" />
+            Inactive
+          </label>
+        HTML
+      end
+    end
+
     class FormBuilderSubmitTest < FormBuilderTestBase
       def test_submit
         html = @form.submit
