@@ -101,6 +101,16 @@ module BulmaPhlex
       end
       # rubocop:enable Metrics/ParameterLists
 
+      # The following Bulma button options can be passed as options to customize the button:
+      #
+      # - color (String): colors such as "primary" or "danger"
+      # - size (String): small, normal, medium, or large
+      # - mode (String): light or dark
+      # - responsive (Boolean): makes the size responsive
+      # - fullwidth (Boolean)
+      # - outlined (Boolean)
+      # - inverted (Boolean)
+      # - rounded (Boolean)
       def submit(value = nil, options = {})
         if value.is_a?(Hash)
           options = value
@@ -108,7 +118,7 @@ module BulmaPhlex
         end
 
         options = options.dup
-        options[:class] = Array.wrap(options[:class]) << :button
+        options[:class] = Array.wrap(options[:class]) << BulmaPhlex::Button.classes_for(**extract_button_options!(options))
 
         FormField.new do
           super(value, options)
@@ -191,6 +201,10 @@ module BulmaPhlex
             delivered.call(m, html_opts)
           end
         end
+      end
+
+      def extract_button_options!(options)
+        options.extract!(:color, :mode, :size, :responsive, :fullwidth, :outlined, :inverted, :rounded)
       end
     end
   end
