@@ -418,27 +418,72 @@ module BulmaPhlex
       end
 
       def test_submit_with_value_and_options
-        html = @form.submit("Save", class: "is-primary")
+        html = @form.submit("Save", data: { value: "test" })
 
         assert_html_equal <<~HTML, html
           <div class = "field">
             <div class="control">
-              <input type="submit" name="commit" value="Save" class="is-primary button" data-disable-with="Save">
+              <input type="submit" name="commit" value="Save" data-value="test" class="button" data-disable-with="Save">
             </div>
           </div>
         HTML
       end
 
       def test_without_value
-        html = @form.submit(class: "is-primary")
+        html = @form.submit
 
         assert_html_equal <<~HTML, html
           <div class = "field">
             <div class="control">
-              <input type="submit" name="commit" value="Create Test model" class="is-primary button" data-disable-with="Create Test model">
+              <input type="submit" name="commit" value="Create Test model" class="button" data-disable-with="Create Test model">
             </div>
           </div>
         HTML
+      end
+
+      def test_color
+        html = @form.submit(color: "primary")
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <div class="control">
+              <input type="submit" name="commit" value="Create Test model" class="button is-primary" data-disable-with="Create Test model">
+            </div>
+          </div>
+        HTML
+      end
+
+      def test_size
+        assert_html_includes @form.submit(size: "large"), 'class="button is-large"'
+      end
+
+      def test_mode
+        assert_html_includes @form.submit(mode: "dark"), 'class="button is-dark"'
+      end
+
+      def test_responsive
+        assert_html_includes @form.submit(responsive: true), 'class="button is-responsive"'
+      end
+
+      def test_fullwidth
+        assert_html_includes @form.submit(fullwidth: true), 'class="button is-fullwidth"'
+      end
+
+      def test_outlined
+        assert_html_includes @form.submit(outlined: true), 'class="button is-outlined"'
+      end
+
+      def test_inverted
+        assert_html_includes @form.submit(inverted: true), 'class="button is-inverted"'
+      end
+
+      def test_rounded
+        assert_html_includes @form.submit(rounded: true), 'class="button is-rounded"'
+      end
+
+      def test_with_multiple_button_options
+        assert_html_includes @form.submit(color: "danger", outlined: true, rounded: true),
+                             'class="button is-danger is-outlined is-rounded"'
       end
     end
 
