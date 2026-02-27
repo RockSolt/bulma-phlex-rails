@@ -7,6 +7,7 @@ gemspec
 
 group :development, :test do
   gem "activemodel"
+  gem "appraisal", "~> 2.5"
   gem "irb"
   gem "minitest", "~> 5.16"
   gem "minitest-difftastic"
