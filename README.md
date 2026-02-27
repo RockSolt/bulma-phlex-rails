@@ -293,6 +293,8 @@ end
 
 After checking out the repo, run `bundle install` to install dependencies. Then, run `rake test` to run the tests.
 
+To test across different versions of Rails, use the `appraisal` gem. Run `bundle exec appraisal install` to set up the different test environments, then `bundle exec appraisal rake test` to run the tests across all versions.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/RockSolt/bulma-phlex-rails.
