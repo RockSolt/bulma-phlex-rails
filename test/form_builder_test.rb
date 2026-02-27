@@ -487,6 +487,110 @@ module BulmaPhlex
       end
     end
 
+    class FormBuilderButtonTest < FormBuilderTestBase
+      def test_button
+        html = @form.button("Create Article")
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <div class="control">
+              <button name="button" type="submit" class="button">Create Article</button>
+            </div>
+          </div>
+        HTML
+      end
+
+      def test_with_icon_left
+        html = @form.button("Create Article", icon_left: "fas fa-pencil")
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <div class="control">
+              <button name="button" type="submit" class="button">
+                <span class="icon">
+                  <i class="fas fa-pencil"></i>
+                </span>
+                  Create Article
+              </button>
+            </div>
+          </div>
+        HTML
+      end
+
+      def test_with_block
+        html = @form.button("Create Article") { |value| "Button: #{value}" }
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <div class="control">
+              <button name="button" type="submit" class="button">Button: Create Article</button>
+            </div>
+          </div>
+        HTML
+      end
+
+      def test_with_column
+        html = @form.button("Create Article", column: "two-thirds")
+
+        assert_html_equal <<~HTML, html
+          <div class = "field column is-two-thirds">
+            <div class="control">
+              <button name="button" type="submit" class="button">Create Article</button>
+            </div>
+          </div>
+        HTML
+      end
+
+      def test_with_grid
+        assert_html_includes @form.button("Create Article", grid: "col-span-3"), 'class="field cell is-col-span-3"'
+      end
+
+      def test_color
+        html = @form.button("Create Article", color: "primary")
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <div class="control">
+              <button name="button" type="submit" class="button is-primary">Create Article</button>
+            </div>
+          </div>
+        HTML
+      end
+
+      def test_size
+        assert_html_includes @form.button("Create Article", size: "large"), 'class="button is-large"'
+      end
+
+      def test_mode
+        assert_html_includes @form.button("Create Article", mode: "dark"), 'class="button is-dark"'
+      end
+
+      def test_responsive
+        assert_html_includes @form.button("Create Article", responsive: true), 'class="button is-responsive"'
+      end
+
+      def test_fullwidth
+        assert_html_includes @form.button("Create Article", fullwidth: true), 'class="button is-fullwidth"'
+      end
+
+      def test_outlined
+        assert_html_includes @form.button("Create Article", outlined: true), 'class="button is-outlined"'
+      end
+
+      def test_inverted
+        assert_html_includes @form.button("Create Article", inverted: true), 'class="button is-inverted"'
+      end
+
+      def test_rounded
+        assert_html_includes @form.button("Create Article", rounded: true), 'class="button is-rounded"'
+      end
+
+      def test_with_multiple_button_options
+        assert_html_includes @form.button("Create Article", color: "danger", outlined: true, rounded: true),
+                             'class="button is-danger is-outlined is-rounded"'
+      end
+    end
+
     class FormBuilderColumnsTest < FormBuilderTestBase
       def test_columns_wraps_fields_in_columns_div
         html = @form.columns do
