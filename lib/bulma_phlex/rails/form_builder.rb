@@ -40,18 +40,21 @@ module BulmaPhlex
       def number_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
       def range_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
 
-      def textarea(method, options = {})
+      # Prior to 8.0, the methods text_area and check_box did not have aliases. Defining with the underscore and
+      # aliasing to the non-underscored versions allows support for Rails 7.2.
+
+      def text_area(method, options = {})
         wrap_field(method, options, add_class: "textarea") do |m, opts|
           super(m, opts)
         end
       end
-      alias text_area textarea
+      alias textarea text_area
 
-      def checkbox(method, options = {}, checked_value = "1", unchecked_value = "0", &label_block)
+      def check_box(method, options = {}, checked_value = "1", unchecked_value = "0", &label_block)
         delivered = ->(opts) { super(method, opts, checked_value, unchecked_value) }
         Checkbox.new(self, method, options, delivered, label_block).render_in(@template)
       end
-      alias check_box checkbox
+      alias checkbox check_box
 
       def radio_button(method, tag_value, options = {})
         delivered = ->(opts) { super(method, tag_value, opts) }
