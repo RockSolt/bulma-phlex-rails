@@ -125,6 +125,21 @@ module BulmaPhlex
         end.render_in(@template)
       end
 
+      def button(value = nil, options = {}, &)
+        if value.is_a?(Hash)
+          options = value
+          value = nil
+        end
+
+        button_opts, field_opts, icon_opts = parse_button_options(options)
+
+        FormField.new(**field_opts) do
+          super(value, button_opts) do |value_from_delivered|
+            FormButtonLabel.new(value_from_delivered, **icon_opts, &).render_in(@template)
+          end
+        end.render_in(@template)
+      end
+
       # Fields declared in a column block will be wrapped in a Bulma column and carry
       # the `column` class by default (fields can use the `column` option to set sizes).
       #
@@ -184,8 +199,7 @@ module BulmaPhlex
         options = options.dup
         options[:class] = Array.wrap(options[:class]) << add_class if add_class
 
-        form_field_options = options.extract!(:help, :icon_left, :icon_right, :column, :grid)
-                                    .with_defaults(column: @columns_flag, grid: @grid_flag)
+        form_field_options = extract_field_options!(options)
 
         form_field = FormField.new(**form_field_options) do |f|
           f.label { label(method).html_safe } unless options.delete(:suppress_label)
@@ -203,8 +217,21 @@ module BulmaPhlex
         end
       end
 
+      def extract_field_options!(options)
+        options.extract!(:help, :icon_left, :icon_right, :column, :grid)
+               .with_defaults(column: @columns_flag, grid: @grid_flag)
+      end
+
       def extract_button_options!(options)
         options.extract!(:color, :mode, :size, :responsive, :fullwidth, :outlined, :inverted, :rounded)
+      end
+
+      def parse_button_options(options)
+        button_options = options.dup
+        button_options[:class] = Array.wrap(options[:class]) << BulmaPhlex::Button.classes_for(**extract_button_options!(button_options))
+        icon_options = button_options.extract!(:icon_left, :icon_right).freeze
+        field_options = extract_field_options!(button_options).freeze
+        [button_options.freeze, field_options, icon_options]
       end
     end
   end
