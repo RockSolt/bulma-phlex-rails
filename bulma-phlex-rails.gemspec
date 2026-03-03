@@ -22,6 +22,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "actionpack", ">= 7.2"
   spec.add_dependency "bulma-phlex", ">= 0.12.0"
-  spec.add_dependency "phlex-rails", ">= 2.3"
+  spec.add_dependency "phlex-rails", ">= 2.4"
   spec.add_dependency "railties", ">= 7.2"
 end
