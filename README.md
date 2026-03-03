@@ -70,7 +70,6 @@ Passing a block will shortcut this logic and fallback to the delivered.
 > The following form helpers are still under construction:
 >
 > - collection_checkboxes
-> - file_field
 
 
 ### Columns and Grids
