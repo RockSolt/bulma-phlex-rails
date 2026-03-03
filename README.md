@@ -7,6 +7,45 @@
 Simplify the view layer with a component library built on Phlex and styled with Bulma CSS framework. The code is simple
 and the UI is clean.
 
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem "bulma-phlex-rails"
+```
+
+And then execute:
+
+```bash
+bundle install
+```
+
+Or install it yourself as:
+
+```bash
+gem install bulma-phlex-rails
+```
+
+### Dependencies
+
+This gem requires:
+
+- Ruby 3.2.10 or higher
+- Rails 7.2 or higher
+- Phlex Rails 2.3 or higher
+- Bulma CSS (which you'll need to include in your application)
+
+### Required Setup
+
+1. Include Bulma CSS in your application. You can add it via npm/yarn, CDN, or the [bulma-rails](https://github.com/joshuajansen/bulma-rails) gem.
+
+2. Require the gem in your code:
+
+```ruby
+require "bulma-phlex-rails"
+```
+
 ## Form Builder
 
 The custom form builder that simplifies the process of creating forms with Bulma styles. It overrides the form helpers to generate Bulma-compatible HTML.
@@ -70,6 +109,24 @@ Passing a block will shortcut this logic and fallback to the delivered.
 > The following form helpers are still under construction:
 >
 > - collection_checkboxes
+
+
+### Nested Forms
+
+Add and remove rows from nested forms with form builder methods `nested_form_add_button` and `nested_form_delete_button`. These work with Rails' `fields_for` helper to create dynamic nested forms.
+
+There's no need to define anything else. Just use the methods in your form:
+
+```ruby
+form.fields_for :tasks do |task_form|
+  task_form.text_field :name
+  task_form.nested_form_delete_button icon: "fas fa-trash", row_selector: "tr"
+end
+
+form.nested_form_add_button :tasks, label: "Add Task", container: "#tasks-list"
+```
+
+The delete button will either hide the row and mark it for deletion (for existing records) or remove it from the DOM (for new records).
 
 
 ### Columns and Grids
@@ -151,6 +208,7 @@ end
 
 All of the power of Bulma columns and grids are at your fingertips with an easy-to-use, Rails-friendly API.
 
+
 ### Form Addons and Groups--Coming Soon!
 
 > [!IMPORTANT]
@@ -171,23 +229,6 @@ form.group do
   form.text_field :last_name, placeholder: "Last Name"
 end
 ```
-
-### Nested Forms
-
-Add and remove rows from nested forms with form builder methods `nested_form_add_button` and `nested_form_delete_button`. These work with Rails' `fields_for` helper to create dynamic nested forms.
-
-There's no need to define anything else. Just use the methods in your form:
-
-```ruby
-form.fields_for :tasks do |task_form|
-  task_form.text_field :name
-  task_form.nested_form_delete_button icon: "fas fa-trash", row_selector: "tr"
-end
-
-form.nested_form_add_button :tasks, label: "Add Task", container: "#tasks-list"
-```
-
-The delete button will either hide the row and mark it for deletion (for existing records) or remove it from the DOM (for new records).
 
 
 ## Display Components and Helpers
