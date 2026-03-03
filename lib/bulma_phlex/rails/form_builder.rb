@@ -40,6 +40,20 @@ module BulmaPhlex
       def number_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
       def range_field(method, options = {}) = wrap_field(method, options) { |m, opts| super(m, opts) }
 
+      def file_field(method, options = {})
+        opts, comp_opts, field_options = parse_file_field_options(options)
+
+        BulmaPhlex::FormField.new(**field_options) do |f|
+          f.label { label(method).html_safe } unless options.delete(:suppress_label)
+          f.control do
+            BulmaPhlex::FileUpload.new(**comp_opts) do |data_attributes|
+              opts[:data] = (opts[:data] || {}).merge(data_attributes) if data_attributes
+              super(method, opts)
+            end.render_in(@template)
+          end
+        end.render_in(@template)
+      end
+
       # Prior to 8.0, the methods text_area and check_box did not have aliases. Defining with the underscore and
       # aliasing to the non-underscored versions allows support for Rails 7.2.
 
@@ -227,6 +241,15 @@ module BulmaPhlex
 
       def extract_button_options!(options)
         options.extract!(:color, :mode, :size, :responsive, :fullwidth, :outlined, :inverted, :rounded)
+      end
+
+      def parse_file_field_options(options)
+        opts = options.dup
+        opts[:class] = Array.wrap(opts[:class]) << "file-input"
+        comp_opts = opts.extract!(:color, :size, :align, :fullwidth, :boxed)
+        comp_opts[:name] = opts.delete(:show_selections)
+        field_options = extract_field_options!(opts)
+        [opts, comp_opts.freeze, field_options.freeze]
       end
 
       def parse_button_options(options)

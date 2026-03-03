@@ -2,6 +2,9 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["fileInput", "fileList"]
+  static values = {
+    noFilesSelectedText: { type: String, default: "No files selected" },
+  }
 
   acceptValues = []
 
@@ -17,7 +20,7 @@ export default class extends Controller {
     const curFiles = this.fileInputTarget.files;
     if (curFiles.length === 0) {
       const para = document.createElement("p")
-      para.textContent = "No files currently selected for upload"
+      para.textContent = this.noFilesSelectedTextValue
       preview.appendChild(para)
     } else {
       const list = document.createElement("ul")

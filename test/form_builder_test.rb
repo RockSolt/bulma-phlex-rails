@@ -189,6 +189,94 @@ module BulmaPhlex
       end
     end
 
+    class FormBuilderFileFieldTest < FormBuilderTestBase
+      def test_file_field
+        html = @form.file_field(:attachment)
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <label class="label" for="test_model_attachment">Attachment</label>
+            <div class="control">
+              <div class="file">
+                <label class="file-label">
+                  <input class="file-input" type="file" name="test_model[attachment]" id="test_model_attachment" />
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">Choose a file…</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        HTML
+      end
+
+      def test_with_color_option
+        html = @form.file_field(:attachment, color: "primary")
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <label class="label" for="test_model_attachment">Attachment</label>
+            <div class="control">
+              <div class="file is-primary">
+                <label class="file-label">
+                  <input class="file-input" type="file" name="test_model[attachment]" id="test_model_attachment" />
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">Choose a file…</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        HTML
+      end
+
+      def test_with_size
+        assert_html_includes @form.file_field(:attachment, size: "large"), 'class="file is-large"'
+      end
+
+      def test_with_align_right
+        assert_html_includes @form.file_field(:attachment, align: "right"), 'class="file is-right"'
+      end
+
+      def test_with_fullwidth
+        assert_html_includes @form.file_field(:attachment, fullwidth: true), 'class="file is-fullwidth"'
+      end
+
+      def test_with_boxed
+        assert_html_includes @form.file_field(:attachment, boxed: true), 'class="file is-boxed"'
+      end
+
+      def test_with_show_selections
+        html = @form.file_field(:attachment, show_selections: true)
+
+        assert_html_equal <<~HTML, html
+          <div class = "field">
+            <label class="label" for="test_model_attachment">Attachment</label>
+            <div class="control">
+              <div class="file has-name" data-controller="bulma-phlex--file-input-display">
+                <label class="file-label">
+                  <input class="file-input" data-bulma-phlex--file-input-display-target="fileInput" data-action="bulma-phlex--file-input-display#show" type="file" name="test_model[attachment]" id="test_model_attachment" />
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label"> Choose a file… </span>
+                  </span>
+                  <span class="file-name is-flex" data-bulma-phlex--file-input-display-target="fileList">No file uploaded</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        HTML
+      end
+    end
+
     class FormBuilderSelectTest < FormBuilderTestBase
       def test_select_renders_with_label_and_control
         html = @form.select(:name, ["Option 1", "Option 2"])
