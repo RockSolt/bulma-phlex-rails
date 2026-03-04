@@ -9,7 +9,7 @@ and the UI is clean.
 
 Let's take a look at an example:
 
-<img width="752" height="510" alt="image" src="https://github.com/user-attachments/assets/04dce8ba-c4c2-427f-b1f6-87d7c073e6e8" />
+<img width="752" height="510" alt="Example form" src="https://github.com/user-attachments/assets/04dce8ba-c4c2-427f-b1f6-87d7c073e6e8" />
 
 The first row has three fields, in columns, with labels:
 
@@ -272,6 +272,9 @@ end
 ## Display Components and Helpers
 
 The utilities and clean look of forms is also available for displaying data. The Phlex mixin `BulmaPhlex::Rails::DisplayableFormFields` makes it easy to show and organize fields.
+
+<img width="741" height="171" alt="Displayable form fields" src="https://github.com/user-attachments/assets/c75c4ab4-a1dd-4bab-ac26-c2c00d164eb0" />
+
 
 ```ruby
 with_options model: invoice do
