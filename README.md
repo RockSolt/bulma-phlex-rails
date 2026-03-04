@@ -7,6 +7,44 @@
 Simplify the view layer with a component library built on Phlex and styled with Bulma CSS framework. The code is simple
 and the UI is clean.
 
+Let's take a look at an example:
+
+<img width="752" height="510" alt="image" src="https://github.com/user-attachments/assets/04dce8ba-c4c2-427f-b1f6-87d7c073e6e8" />
+
+The first row has three fields, in columns, with labels:
+
+```ruby
+form.columns do
+  form.collection_select :customer_id, @customers, :id, :name, {}, { autofocus: true }
+  form.date_field :invoice_date
+  form.text_field :number
+end
+```
+
+There's a nested form, with delete buttons and an add button. Those are built in.
+
+```ruby
+ff.nested_form_delete_button(row_selector: "tr",
+                             icon: "fas fa-trash",
+                             color: "danger",
+                             rounded: true,
+                             outlined: true)
+```
+
+You do not need a template for the new row, just add a button:
+
+```ruby
+form.nested_form_add_button(:lines,
+                            label: "Add Line",
+                            container: "#invoice-lines tbody",
+                            color: "success",
+                            rounded: true,
+                            outlined: true,
+                            icon: "fas fa-plus")
+```
+
+If you like clean UI, if you like clean code, you are in the right place. Take the power of Bulma CSS and Phlex for a spin today!
+
 ## Installation
 
 Add this line to your application's Gemfile:
