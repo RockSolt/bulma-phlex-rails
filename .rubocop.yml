@@ -2,8 +2,10 @@ plugins:
   - rubocop-minitest
 
 AllCops:
-  TargetRubyVersion: 3.2
   NewCops: enable
+  SuggestExtensions:
+    rubocop-rake: false
+  TargetRubyVersion: 3.2
 
 Lint/MissingSuper:
   Exclude:
