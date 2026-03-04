@@ -43,14 +43,6 @@ module BulmaPhlex
       def test_text_field_renders_with_label_and_control
         html = @form.text_field(:name)
 
-        # Check it has the field structure
-        assert_match(/class="field"/, html)
-        assert_match(/class="label"/, html)
-        assert_match(/class="control"/, html)
-        assert_match(/class="input"/, html)
-        assert_match(/type="text"/, html)
-        assert_match(/name="test_model\[name\]"/, html)
-
         assert_html_equal <<~HTML, html
           <div class = "field">
             <label class="label" for="test_model_name">Name</label>

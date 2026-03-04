@@ -8,7 +8,6 @@ module BulmaPhlex
       include BulmaPhlex::Rails::DisplayableBlockOptions
 
       def setup
-        @div_args = []
         @components = []
       end
 
@@ -24,7 +23,7 @@ module BulmaPhlex
           assert block_display_options[:column]
         end
 
-        assert 1, @div_args.size
+        assert_equal 1, @components.size
         assert_instance_of BulmaPhlex::Columns, @components.first
       end
 
@@ -32,7 +31,7 @@ module BulmaPhlex
         in_grid do
           assert block_display_options[:grid]
         end
-        assert 1, @components.size
+        assert_equal 1, @components.size
         assert_instance_of BulmaPhlex::Grid, @components.first
       end
 
@@ -42,7 +41,7 @@ module BulmaPhlex
           assert_equal 3, block_display_options.dig(:grid_options, :fixed_columns)
           assert_equal 4, block_display_options.dig(:grid_options, :gap)
         end
-        assert 1, @components.size
+        assert_equal 1, @components.size
         assert_instance_of BulmaPhlex::Grid, @components.first
       end
 

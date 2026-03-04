@@ -1,3 +1,6 @@
+plugins:
+  - rubocop-minitest
+
 AllCops:
   TargetRubyVersion: 3.2
   NewCops: enable
@@ -13,6 +16,10 @@ Metrics/ClassLength:
 Metrics/MethodLength:
   Exclude:
     - test/**/*_test.rb
+
+Minitest/UselessAssertion:
+  Exclude:
+    - test/tag_output_assertions.rb
 
 Naming/FileName:
   Exclude:

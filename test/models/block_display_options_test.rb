@@ -36,7 +36,7 @@ module BulmaPhlex
         options = BlockDisplayOptions.new
         options.push({ columns: true })
 
-        assert_equal true, options.current[:column]
+        assert options.current[:column]
         assert_predicate options, :column?
         assert_equal({}, options.column_options)
       end
@@ -54,7 +54,7 @@ module BulmaPhlex
         options = BlockDisplayOptions.new
         options.push({ grid: true })
 
-        assert_equal true, options.current[:grid]
+        assert options.current[:grid]
         assert_predicate options, :grid?
         assert_equal({}, options.grid_options)
       end
