@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ComponentTestCase < ActiveSupport::TestCase
+class ComponentTestCase < Minitest::Test
   include TagOutputAssertions
 
   def render(...)
