@@ -6,8 +6,6 @@ AllCops:
   SuggestExtensions:
     rubocop-rake: false
   TargetRubyVersion: 3.2
-  Exclude:
-    - "gemfiles/**/*"
 
 Lint/MissingSuper:
   Exclude:
@@ -28,6 +26,10 @@ Minitest/UselessAssertion:
 Naming/FileName:
   Exclude:
     - lib/bulma-phlex-rails.rb
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - "gemfiles/**/*"
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
