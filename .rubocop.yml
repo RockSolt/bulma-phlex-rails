@@ -2,12 +2,12 @@ plugins:
   - rubocop-minitest
 
 AllCops:
-  Exclude:
-    - "gemfiles/**/*"
   NewCops: enable
   SuggestExtensions:
     rubocop-rake: false
   TargetRubyVersion: 3.2
+  Exclude:
+    - "gemfiles/**/*"
 
 Lint/MissingSuper:
   Exclude:
