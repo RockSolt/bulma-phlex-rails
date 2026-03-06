@@ -3,7 +3,7 @@ plugins:
 
 AllCops:
   Exclude:
-    - gemfiles/*.gemfile
+    - "gemfiles/**/*.gemfile"
   NewCops: enable
   SuggestExtensions:
     rubocop-rake: false
