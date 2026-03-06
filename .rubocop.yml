@@ -2,6 +2,8 @@ plugins:
   - rubocop-minitest
 
 AllCops:
+  Exclude:
+    - "gemfiles/**/*"
   NewCops: enable
   SuggestExtensions:
     rubocop-rake: false
