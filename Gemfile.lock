@@ -69,6 +69,7 @@ GEM
       pretty_please
     dispersion (0.2.0)
       prism
+    docile (1.4.1)
     drb (2.2.3)
     erb (6.0.2)
     erubi (1.13.1)
@@ -190,6 +191,12 @@ GEM
       rubocop-ast (>= 1.38.0, < 2.0)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.13.2)
+    simplecov_json_formatter (0.1.4)
     stringio (3.2.0)
     thor (1.5.0)
     tsort (0.2.0)
@@ -223,6 +230,7 @@ DEPENDENCIES
   rake (~> 13.0)
   rubocop (~> 1.21)
   rubocop-minitest (~> 0.39)
+  simplecov (~> 0.22)
 
 BUNDLED WITH
    2.7.1
