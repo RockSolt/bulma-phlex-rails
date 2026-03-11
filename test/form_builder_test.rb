@@ -439,21 +439,28 @@ module BulmaPhlex
         HTML
       end
 
-      def test_invokes_original_with_block
+      def test_with_block
         html = @form.collection_check_boxes(:active, [true, false], :itself, :to_s) do |cb|
           cb.label(class: "custom-checkbox") { cb.check_box + cb.text }
         end
 
         assert_html_equal <<~HTML, html
-          <input type="hidden" name="test_model[active][]" value="" autocomplete="off" />
-          <label class="custom-checkbox" for="test_model_active_true">
-            <input type="checkbox" value="true" checked="checked" name="test_model[active][]" id="test_model_active_true" />
-            true
-          </label>
-          <label class="custom-checkbox" for="test_model_active_false">
-            <input type="checkbox" value="false" name="test_model[active][]" id="test_model_active_false" />
-            false
-          </label>
+          <div class="field">
+            <label class="label" for="test_model_active">Active</label>
+            <div class="control">
+              <div class="checkboxes">
+                <input type="hidden" name="test_model[active][]" value="" autocomplete="off" />
+                <label class="custom-checkbox" for="test_model_active_true">
+                  <input class="mr-2" type="checkbox" value="true" checked="checked" name="test_model[active][]" id="test_model_active_true" />
+                  true
+                </label>
+                <label class="custom-checkbox" for="test_model_active_false">
+                  <input class="mr-2" type="checkbox" value="false" name="test_model[active][]" id="test_model_active_false" />
+                  false
+                </label>
+              </div>
+            </div>
+           </div>
         HTML
       end
     end
@@ -555,21 +562,28 @@ module BulmaPhlex
         HTML
       end
 
-      def test_invokes_original_with_block
+      def test_with_block
         html = @form.collection_radio_buttons(:active, @collection, :value, :name) do |rb|
-          rb.label(class: "custom-radio") { rb.radio_button + rb.text }
+          rb.label(class: "is-italic") { rb.radio_button + rb.text }
         end
 
         assert_html_equal <<~HTML, html
-          <input type="hidden" name="test_model[active]" value="" autocomplete="off" />
-          <label class="custom-radio" for="test_model_active_true">
-            <input type="radio" value="true" checked="checked" name="test_model[active]" id="test_model_active_true" />
-            Active
-          </label>
-          <label class="custom-radio" for="test_model_active_false">
-            <input type="radio" value="false" name="test_model[active]" id="test_model_active_false" />
-            Inactive
-          </label>
+          <div class="field">
+            <label class="label" for="test_model_active">Active</label>
+            <div class="control">
+              <div class="radios">
+                <input type="hidden" name="test_model[active]" value="" autocomplete="off" />
+                <label class="is-italic" for="test_model_active_true">
+                  <input class="mr-2" type="radio" value="true" checked="checked" name="test_model[active]" id="test_model_active_true" />
+                  Active
+                </label>
+                <label class="is-italic" for="test_model_active_false">
+                  <input class="mr-2" type="radio" value="false" name="test_model[active]" id="test_model_active_false" />
+                  Inactive
+                </label>
+              </div>
+            </div>
+           </div>
         HTML
       end
     end

@@ -140,8 +140,6 @@ Both the `collection_radio_buttons` and `collection_checkboxes` methods wrap the
 form.collection_radio_buttons(:author_id, Author.all, :id, :name_with_initial)
 ```
 
-Passing a block will shortcut this logic and fallback to the delivered.
-
 
 ### Nested Forms
 

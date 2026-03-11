@@ -96,16 +96,13 @@ module BulmaPhlex
       # pass a block this logic will be skipped.
       #
       # Add option `stacked: true` to stack the checkboxes vertically.
-      def collection_check_boxes(method, collection, value_method, text_method, options = {}, html_options = {})
-        return super if block_given?
-
+      def collection_check_boxes(method, collection, value_method, text_method, options = {}, html_options = {}, &block)
         wrap_field(method, html_options, add_class: false) do |m, html_opts|
           wrapper_opts, label_class, html_opts[:class] = parse_collection_options(html_opts, "checkbox", "checkboxes")
+          block ||= ->(builder) { builder.label(class: label_class) { builder.check_box + builder.text } }
 
           @template.content_tag("div", wrapper_opts) do
-            super(m, collection, value_method, text_method, options, html_opts) do |cb|
-              cb.label(class: label_class) { cb.check_box + cb.text }
-            end
+            super(m, collection, value_method, text_method, options, html_opts, &block)
           end
         end
       end
@@ -116,16 +113,14 @@ module BulmaPhlex
       # pass a block this logic will be skipped.
       #
       # Add option `stacked: true` to stack the radio buttons vertically.
-      def collection_radio_buttons(method, collection, value_method, text_method, options = {}, html_options = {})
-        return super if block_given?
-
+      def collection_radio_buttons(method, collection, value_method, text_method, options = {}, html_options = {},
+                                   &block)
         wrap_field(method, html_options, add_class: false) do |m, html_opts|
           wrapper_opts, label_class, html_opts[:class] = parse_collection_options(html_opts, "radio", "radios")
+          block ||= ->(builder) { builder.label(class: label_class) { builder.radio_button + builder.text } }
 
           @template.content_tag("div", wrapper_opts) do
-            super(m, collection, value_method, text_method, options, html_opts) do |rb|
-              rb.label(class: label_class) { rb.radio_button + rb.text }
-            end
+            super(m, collection, value_method, text_method, options, html_opts, &block)
           end
         end
       end
