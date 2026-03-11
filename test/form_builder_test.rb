@@ -542,11 +542,11 @@ module BulmaPhlex
               <div class="radios">
                 <input type="hidden" name="test_model[active]" value="" autocomplete="off" />
                 <label class="radio" for="test_model_active_true">
-                  <input class="is-primary" type="radio" value="true" checked="checked" name="test_model[active]" id="test_model_active_true" />
+                  <input class="is-primary mr-2" type="radio" value="true" checked="checked" name="test_model[active]" id="test_model_active_true" />
                   Active
                 </label>
                 <label class="radio" for="test_model_active_false">
-                  <input class="is-primary" type="radio" value="false" name="test_model[active]" id="test_model_active_false" />
+                  <input class="is-primary mr-2" type="radio" value="false" name="test_model[active]" id="test_model_active_false" />
                   Inactive
                 </label>
               </div>

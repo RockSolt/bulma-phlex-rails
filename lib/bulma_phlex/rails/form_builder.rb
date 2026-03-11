@@ -100,7 +100,7 @@ module BulmaPhlex
         return super if block_given?
 
         wrap_field(method, html_options, add_class: false) do |m, html_opts|
-          wrapper_opts, label_class, html_opts[:class] = parse_checkbox_collection_options(html_opts)
+          wrapper_opts, label_class, html_opts[:class] = parse_collection_options(html_opts, "checkbox", "checkboxes")
 
           @template.content_tag("div", wrapper_opts) do
             super(m, collection, value_method, text_method, options, html_opts) do |cb|
@@ -120,12 +120,11 @@ module BulmaPhlex
         return super if block_given?
 
         wrap_field(method, html_options, add_class: false) do |m, html_opts|
-          stacked = html_opts.delete(:stacked)
-          wrapper_opts = stacked ? {} : { class: "radios" }
+          wrapper_opts, label_class, html_opts[:class] = parse_collection_options(html_opts, "radio", "radios")
 
           @template.content_tag("div", wrapper_opts) do
             super(m, collection, value_method, text_method, options, html_opts) do |rb|
-              rb.label(class: stacked ? "is-block" : "radio") { rb.radio_button(class: "mr-2") + rb.text }
+              rb.label(class: label_class) { rb.radio_button + rb.text }
             end
           end
         end
@@ -272,10 +271,10 @@ module BulmaPhlex
         [opts, comp_opts.freeze, field_options.freeze]
       end
 
-      def parse_checkbox_collection_options(options)
+      def parse_collection_options(options, singular_class, plural_class)
         stacked = options.delete(:stacked)
-        wrapper_opts = stacked ? {} : { class: "checkboxes" }
-        label_class = stacked ? "is-block" : "checkbox"
+        wrapper_opts = stacked ? {} : { class: plural_class }
+        label_class = stacked ? "is-block" : singular_class
         classes = Array.wrap(options[:class]) << "mr-2"
         [wrapper_opts, label_class, classes]
       end
