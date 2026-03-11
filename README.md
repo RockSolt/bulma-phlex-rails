@@ -132,21 +132,15 @@ form.checkbox :terms_of_service do
 end
 ```
 
-#### Collection Radio Buttons
+#### Collection Radio Buttons and Checkboxes
 
-The `collection_radio_buttons` method wraps the radio buttons with the Bulma structure and styles including a label. Add option `stacked: true` to stack the radio buttons vertically.
+Both the `collection_radio_buttons` and `collection_checkboxes` methods wrap the inputss with the Bulma structure and styles including a label. Add option `stacked: true` to stack the inputs vertically.
 
 ```ruby
 form.collection_radio_buttons(:author_id, Author.all, :id, :name_with_initial)
 ```
 
 Passing a block will shortcut this logic and fallback to the delivered.
-
-
-> [!NOTE]
-> The following form helpers are still under construction:
->
-> - collection_checkboxes
 
 
 ### Nested Forms
