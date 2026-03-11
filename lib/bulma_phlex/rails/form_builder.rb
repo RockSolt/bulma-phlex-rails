@@ -91,6 +91,26 @@ module BulmaPhlex
 
       # rubocop:disable Metrics/ParameterLists
 
+      # The collection_check_boxes method is overridden to wrap the checkboxes in a Bulma form field and
+      # apply the `checkbox` class to the labels. It does so by passing a block to the original method. If you
+      # pass a block this logic will be skipped.
+      #
+      # Add option `stacked: true` to stack the checkboxes vertically.
+      def collection_check_boxes(method, collection, value_method, text_method, options = {}, html_options = {})
+        return super if block_given?
+
+        wrap_field(method, html_options, add_class: false) do |m, html_opts|
+          wrapper_opts, label_class, html_opts[:class] = parse_collection_options(html_opts, "checkbox", "checkboxes")
+
+          @template.content_tag("div", wrapper_opts) do
+            super(m, collection, value_method, text_method, options, html_opts) do |cb|
+              cb.label(class: label_class) { cb.check_box + cb.text }
+            end
+          end
+        end
+      end
+      alias collection_checkboxes collection_check_boxes
+
       # The collection_radio_buttons method is overridden to wrap the radio buttons in a Bulma form field and
       # apply the `radio` class to the labels. It does so by passing a block to the original method. If you
       # pass a block this logic will be skipped.
@@ -100,12 +120,11 @@ module BulmaPhlex
         return super if block_given?
 
         wrap_field(method, html_options, add_class: false) do |m, html_opts|
-          stacked = html_opts.delete(:stacked)
-          wrapper_opts = stacked ? {} : { class: "radios" }
+          wrapper_opts, label_class, html_opts[:class] = parse_collection_options(html_opts, "radio", "radios")
 
           @template.content_tag("div", wrapper_opts) do
             super(m, collection, value_method, text_method, options, html_opts) do |rb|
-              rb.label(class: stacked ? "is-block" : "radio") { rb.radio_button(class: "mr-2") + rb.text }
+              rb.label(class: label_class) { rb.radio_button + rb.text }
             end
           end
         end
@@ -250,6 +269,14 @@ module BulmaPhlex
         comp_opts[:name] = opts.delete(:show_selections)
         field_options = extract_field_options!(opts)
         [opts, comp_opts.freeze, field_options.freeze]
+      end
+
+      def parse_collection_options(options, singular_class, plural_class)
+        stacked = options.delete(:stacked)
+        wrapper_opts = stacked ? {} : { class: plural_class }
+        label_class = stacked ? "is-block" : singular_class
+        classes = Array.wrap(options[:class]) << "mr-2"
+        [wrapper_opts, label_class, classes]
       end
 
       def parse_button_options(options)

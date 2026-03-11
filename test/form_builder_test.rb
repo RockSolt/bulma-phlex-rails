@@ -368,6 +368,96 @@ module BulmaPhlex
       end
     end
 
+    class FormBuilderCollectionCheckboxesTest < FormBuilderTestBase
+      def test_collection_checkboxes
+        html = @form.collection_check_boxes(:active, [true, false], :itself, :to_s)
+
+        assert_html_equal <<~HTML, html
+          <div class="field">
+            <label class="label" for="test_model_active">Active</label>
+            <div class="control">
+              <div class="checkboxes">
+                <input type="hidden" name="test_model[active][]" value="" autocomplete="off" />
+                <label class="checkbox" for="test_model_active_true">
+                  <input class="mr-2" type="checkbox" value="true" checked="checked" name="test_model[active][]" id="test_model_active_true" />
+                  true
+                </label>
+                <label class="checkbox" for="test_model_active_false">
+                  <input class="mr-2" type="checkbox" value="false" name="test_model[active][]" id="test_model_active_false" />
+                  false
+                </label>
+              </div>
+            </div>
+           </div>
+        HTML
+      end
+
+      def test_with_stacked_option
+        html = @form.collection_check_boxes(:active, [true, false], :itself, :to_s, {}, stacked: true)
+
+        assert_html_equal <<~HTML, html
+          <div class="field">
+            <label class="label" for="test_model_active">Active</label>
+            <div class="control">
+              <div>
+                <input type="hidden" name="test_model[active][]" value="" autocomplete="off" />
+                <label class="is-block" for="test_model_active_true">
+                  <input class="mr-2" type="checkbox" value="true" checked="checked" name="test_model[active][]" id="test_model_active_true" />
+                  true
+                </label>
+                <label class="is-block" for="test_model_active_false">
+                  <input class="mr-2" type="checkbox" value="false" name="test_model[active][]" id="test_model_active_false" />
+                  false
+                </label>
+              </div>
+            </div>
+           </div>
+        HTML
+      end
+
+      def test_with_additional_html_attributes
+        html = @form.collection_check_boxes(:active, [true, false], :itself, :to_s, {}, class: "is-primary",
+                                                                                        data: { test: "value" })
+
+        assert_html_equal <<~HTML, html
+          <div class="field">
+            <label class="label" for="test_model_active">Active</label>
+            <div class="control">
+              <div class="checkboxes">
+                <input type="hidden" name="test_model[active][]" value="" autocomplete="off" />
+                <label class="checkbox" for="test_model_active_true">
+                  <input class="is-primary mr-2" data-test="value" type="checkbox" value="true" checked="checked" name="test_model[active][]" id="test_model_active_true" />
+                  true
+                </label>
+                <label class="checkbox" for="test_model_active_false">
+                  <input class="is-primary mr-2" data-test="value" type="checkbox" value="false" name="test_model[active][]" id="test_model_active_false" />
+                  false
+                </label>
+              </div>
+            </div>
+           </div>
+        HTML
+      end
+
+      def test_invokes_original_with_block
+        html = @form.collection_check_boxes(:active, [true, false], :itself, :to_s) do |cb|
+          cb.label(class: "custom-checkbox") { cb.check_box + cb.text }
+        end
+
+        assert_html_equal <<~HTML, html
+          <input type="hidden" name="test_model[active][]" value="" autocomplete="off" />
+          <label class="custom-checkbox" for="test_model_active_true">
+            <input type="checkbox" value="true" checked="checked" name="test_model[active][]" id="test_model_active_true" />
+            true
+          </label>
+          <label class="custom-checkbox" for="test_model_active_false">
+            <input type="checkbox" value="false" name="test_model[active][]" id="test_model_active_false" />
+            false
+          </label>
+        HTML
+      end
+    end
+
     class FormBuilderRadioButtonTest < FormBuilderTestBase
       def test_radio_button
         html = @form.radio_button(:active, true)
@@ -452,11 +542,11 @@ module BulmaPhlex
               <div class="radios">
                 <input type="hidden" name="test_model[active]" value="" autocomplete="off" />
                 <label class="radio" for="test_model_active_true">
-                  <input class="is-primary" type="radio" value="true" checked="checked" name="test_model[active]" id="test_model_active_true" />
+                  <input class="is-primary mr-2" type="radio" value="true" checked="checked" name="test_model[active]" id="test_model_active_true" />
                   Active
                 </label>
                 <label class="radio" for="test_model_active_false">
-                  <input class="is-primary" type="radio" value="false" name="test_model[active]" id="test_model_active_false" />
+                  <input class="is-primary mr-2" type="radio" value="false" name="test_model[active]" id="test_model_active_false" />
                   Inactive
                 </label>
               </div>
