@@ -694,7 +694,7 @@ module BulmaPhlex
                 <span class="icon">
                   <i class="fas fa-pencil"></i>
                 </span>
-                  Create Article
+                <span>Create Article</span>
               </button>
             </div>
           </div>

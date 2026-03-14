@@ -13,10 +13,22 @@ module BulmaPhlex
         @icon_right = icon_right
       end
 
-      def view_template
+      def view_template(&)
         render BulmaPhlex::Icon.new(@icon_left) if @icon_left
-        raw block_given? ? yield(@value) : plain(@value)
+        label_text(&)
         render BulmaPhlex::Icon.new(@icon_right) if @icon_right
+      end
+
+      private
+
+      def label_text(&)
+        return yield(@value) if block_given?
+
+        if @icon_left || @icon_right
+          span { @value }
+        else
+          plain @value
+        end
       end
     end
   end
