@@ -27,7 +27,7 @@ module BulmaPhlex
 
         assert_html_equal <<~HTML, result
           <span class="icon"><i class="fas fa-check"></i></span>
-          Submit
+          <span>Submit</span>
         HTML
       end
 
@@ -35,7 +35,7 @@ module BulmaPhlex
         result = BulmaPhlex::Rails::FormButtonLabel.new("Submit", icon_right: "fas fa-check").call
 
         assert_html_equal <<~HTML, result
-          Submit
+          <span>Submit</span>
           <span class="icon"><i class="fas fa-check"></i></span>
         HTML
       end
@@ -46,7 +46,7 @@ module BulmaPhlex
 
         assert_html_equal <<~HTML, result
           <span class="icon"><i class="fas fa-check"></i></span>
-          Submit
+          <span>Submit</span>
           <span class="icon"><i class="fas fa-arrow-right"></i></span>
         HTML
       end
