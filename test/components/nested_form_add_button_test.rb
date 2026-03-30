@@ -29,7 +29,7 @@ module BulmaPhlex
           <div class="field">
             <div class="control">
               <button type="button" class="button" data-controller="bulma-phlex--nested-forms-add-row" data-bulma-phlex--nested-forms-add-row-container-selector-value=".container" data-bulma-phlex--nested-forms-add-row-template-id-value="template-id" data-action="bulma-phlex--nested-forms-add-row#add">
-                <span>Add Item</span>
+                Add Item
               </button>
             </div>
           </div>
@@ -81,7 +81,7 @@ module BulmaPhlex
           <div class="field">
             <div class="control">
               <button type="button" class="button is-primary" data-controller="bulma-phlex--nested-forms-add-row" data-bulma-phlex--nested-forms-add-row-container-selector-value=".container" data-bulma-phlex--nested-forms-add-row-template-id-value="template-id" data-action="bulma-phlex--nested-forms-add-row#add" data-test-attr="value">
-                <span>Add Item</span>
+                Add Item
               </button>
             </div>
           </div>

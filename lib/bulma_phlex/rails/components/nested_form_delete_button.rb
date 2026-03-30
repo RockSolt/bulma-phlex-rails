@@ -34,9 +34,7 @@ module BulmaPhlex
 
       def view_template
         render BulmaPhlex::FormField.new do
-          BulmaPhlex::Button(icon_left: @icon_left, icon_right: @icon_right, **button_html_attributes) do
-            span { @label } if @label
-          end
+          BulmaPhlex::Button(@label, icon_left: @icon_left, icon_right: @icon_right, **button_html_attributes)
         end
       end
 

@@ -27,7 +27,7 @@ module BulmaPhlex
           <div class="field">
             <div class="control">
               <button type="button" class="button" data-controller="bulma-phlex--nested-forms-delete-row" data-bulma-phlex--nested-forms-delete-row-row-selector-value=".row" data-action="bulma-phlex--nested-forms-delete-row#remove">
-                <span>Delete</span>
+                Delete
               </button>
             </div>
           </div>
