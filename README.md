@@ -76,7 +76,7 @@ This gem requires:
 
 ### Required Setup
 
-1. Include Bulma CSS in your application. You can add it via npm/yarn, CDN, or the [bulma-rails](https://github.com/joshuajansen/bulma-rails) gem.
+1. Include Bulma CSS in your application. You can [add it via npm/yarn, CDN](https://bulma.io/documentation/start/installation/), or the [bulma-rails](https://github.com/joshuajansen/bulma-rails) gem.
 
 2. Require the gem in your code:
 
@@ -343,7 +343,7 @@ In some cases, the components are extended here with Rails features.
 For example, the `BulmaPhlex::Card` component provides the standard card. With the Rails extension, your card can now use Turbo Frames for dynamic content loading.
 
 ```ruby
-Bulma::Card() do |card|
+render BulmaPhlex::Card.new do |card|
   card.head("Product Info")
   card.turbo_frame_content("product", src: product_path(@product), pending_message: "Loading product...")
 end
@@ -354,7 +354,7 @@ end
 Rails provides great support for rendering currency amounts with the `number_to_currency` helper. The `BulmaPhlex::Table` component is extended with an `amount_column` method to make it easy to show amounts in your tables.
 
 ```ruby
-BulmaPhlex::Table(invoices) do |table|
+render BulmaPhlex::Table.new(invoices) do |table|
   table.column "Invoice No", &:invoice_number
   table.column "Customer", &:customer_name
   table.amount_column "Amount Due", &:total_amount
