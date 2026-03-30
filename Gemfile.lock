@@ -3,7 +3,7 @@ PATH
   specs:
     bulma-phlex-rails (0.7.0)
       actionpack (>= 7.2)
-      bulma-phlex (>= 0.13.0)
+      bulma-phlex (>= 0.14.0)
       phlex-rails (>= 2.4)
       railties (>= 7.2)
 

@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir["lib/**/*", "app/**/*", "config/importmap.rb"]
 
   spec.add_dependency "actionpack", ">= 7.2"
-  spec.add_dependency "bulma-phlex", ">= 0.13.0"
+  spec.add_dependency "bulma-phlex", ">= 0.14.0"
   spec.add_dependency "phlex-rails", ">= 2.4"
   spec.add_dependency "railties", ">= 7.2"
 end
