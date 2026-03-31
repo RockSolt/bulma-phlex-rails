@@ -274,7 +274,7 @@ with_options model: invoice do
     show_text :customer_name
     show_date :invoice_date
     show_text :number
-    show_amount :amount
+    show_currency :amount
   end
 
   in_columns do
@@ -299,7 +299,7 @@ Method `show_text` renders a label and read-only input field for displaying text
 
 ### Show Date
 
-Method `show_text` renders a label and read-only date field. An optional `format` key can be provided with the options to specify the date format. This is passed to the Rails `to_fs` method.
+Method `show_date` renders a label and read-only date field. An optional `format` key can be provided with the options to specify the date format. This is passed to the Rails `to_fs` method.
 
 #### Arguments
 
