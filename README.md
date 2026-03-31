@@ -88,6 +88,43 @@ require "bulma-phlex-rails"
 
 The custom form builder that simplifies the process of creating forms with Bulma styles. It overrides the form helpers to generate Bulma-compatible HTML.
 
+### Setup
+
+To use the form builder application-wide, set it as the default in an initializer:
+
+```ruby
+# config/initializers/bulma_phlex.rb
+ActionView::Base.default_form_builder = BulmaPhlex::Rails::FormBuilder
+```
+
+Then use `form_with` as normal and the builder is applied automatically:
+
+```ruby
+form_with(model: @project) do |f|
+  f.text_field :name
+end
+```
+
+Rails also lets you set the default form builder per controller, which is useful if you only want Bulma styling on a subset of your application:
+
+```ruby
+class ProjectsController < ApplicationController
+  default_form_builder BulmaPhlex::Rails::FormBuilder
+end
+```
+
+This applies to all views rendered by that controller and any subclasses. To enable it for your entire application at the controller level, set it on `ApplicationController` instead.
+
+Alternatively, specify the builder explicitly on a per-form basis:
+
+```ruby
+form_with(model: @project, builder: BulmaPhlex::Rails::FormBuilder) do |f|
+  f.text_field :name
+end
+```
+
+### Usage
+
 For example, use the standard `text_field` form helper:
 
 ```ruby
