@@ -109,11 +109,12 @@ All of the standard Rails form helpers are supported. Under the hood the form bu
 
 In addition to the standard options, the following options are supported for inputs:
 
-- suppress_label: Do not render the label tag
-- icon_left: Add an icon to the left of the input field
-- icon_right: Add an icon to the right of the input field
-- column: Specify Bulma column classes for responsive layouts
-- cell: Specify Bulma grid cell classes for responsive layouts
+- `suppress_label`: Do not render the label tag
+- `help`: Render a help text below the field
+- `icon_left`: Add an icon to the left of the input field
+- `icon_right`: Add an icon to the right of the input field
+- `column`: Specify a Bulma column size when inside a `columns` block
+- `grid`: Specify a Bulma grid cell size when inside a `grid` block
 
 For example, want your name field to include a user icon?
 
@@ -140,6 +141,49 @@ Both the `collection_radio_buttons` and `collection_checkboxes` methods wrap the
 form.collection_radio_buttons(:author_id, Author.all, :id, :name_with_initial)
 ```
 
+#### File Field
+
+The `file_field` method supports the following additional Bulma-specific options:
+
+- `color`: Bulma color modifier (e.g., `"primary"`, `"info"`, `"success"`, `"danger"`)
+- `size`: Bulma size modifier (`"small"`, `"normal"`, `"medium"`, `"large"`)
+- `align`: Set to `"right"` to right-align the file input label
+- `fullwidth`: (Boolean) Makes the file input span the full width of its container
+- `boxed`: (Boolean) Uses Bulma's boxed file upload style
+- `show_selections`: (Boolean) Displays the selected filename next to the button
+
+```ruby
+form.file_field :avatar, color: "info", boxed: true, show_selections: true
+```
+
+#### Submit
+
+The `submit` method accepts the following Bulma button styling options:
+
+- `color`: (String) Bulma color modifier such as `"primary"`, `"link"`, `"info"`, `"success"`, `"warning"`, or `"danger"`
+- `size`: (String) `"small"`, `"normal"`, `"medium"`, or `"large"`
+- `mode`: (String) `"light"` or `"dark"`
+- `responsive`: (Boolean) Makes the button size responsive
+- `fullwidth`: (Boolean) Makes the button full-width
+- `outlined`: (Boolean) Renders the button as outlined
+- `inverted`: (Boolean) Renders the button as inverted
+- `rounded`: (Boolean) Renders the button with rounded corners
+
+```ruby
+form.submit "Save", color: "primary", rounded: true
+```
+
+#### Button
+
+The `button` method renders a Bulma-styled button and accepts the same Bulma styling options as `submit`, plus icon options:
+
+- `icon_left`: Add an icon to the left of the button label
+- `icon_right`: Add an icon to the right of the button label
+
+```ruby
+form.button "Preview", color: "info", icon_left: "fas fa-eye"
+```
+
 
 ### Nested Forms
 
@@ -157,6 +201,25 @@ form.nested_form_add_button :tasks, label: "Add Task", container: "#tasks-list"
 ```
 
 The delete button will either hide the row and mark it for deletion (for existing records) or remove it from the DOM (for new records).
+
+Both methods accept the following options:
+
+**`nested_form_delete_button`**:
+- `row_selector`: (String, required) CSS selector passed to `closest()` to identify the row to delete
+- `label`: (String, optional) Button label text
+- `icon`: (String, optional) Icon class displayed on the left (shorthand for `icon_left`)
+- `icon_left`: (String, optional) Icon class displayed on the left of the button
+- `icon_right`: (String, optional) Icon class displayed on the right of the button
+
+**`nested_form_add_button`**:
+- `record_name`: (Symbol, required) The name of the nested association (e.g., `:tasks`)
+- `container`: (String, required) CSS selector for the container where new rows are appended
+- `label`: (String, optional) Button label text
+- `icon`: (String, optional) Icon class displayed on the left (shorthand for `icon_left`)
+- `icon_left`: (String, optional) Icon class displayed on the left of the button
+- `icon_right`: (String, optional) Icon class displayed on the right of the button
+
+Both methods also accept Bulma button styling options: `color`, `size`, `mode`, `responsive`, `fullwidth`, `outlined`, `inverted`, and `rounded`.
 
 
 ### Columns and Grids
