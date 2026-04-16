@@ -10,7 +10,7 @@ module Warning
 end
 
 # Define Turbo module for testing purposes; this causes the CardHelper to be included
-module Turbo; end # rubocop:disable Style/OneClassPerFile
+module Turbo; end
 
 $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 require "bulma-phlex-rails"
