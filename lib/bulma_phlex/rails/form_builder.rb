@@ -182,16 +182,20 @@ module BulmaPhlex
       #   to set responsive gap sizes.
       # - `centered`: (Boolean, optional) If true, centers the columns.
       # - `vcentered`: (Boolean, optional) If true, vertically centers the columns.
-      def columns(minimum_breakpoint: nil,
+      #
+      # Any additional HTML attributes passed to the `columns` method will be applied to the outer columns container.
+      def columns(minimum_breakpoint: nil, # rubocop:disable Metrics/ParameterLists
                   multiline: false,
                   gap: nil,
                   centered: false,
-                  vcentered: false, &)
+                  vcentered: false,
+                  **html_attributes,
+                  &)
         @columns_flag = true
         columns = @template.capture(&)
         @columns_flag = false
 
-        BulmaPhlex::Columns.new(minimum_breakpoint:, multiline:, gap:, centered:, vcentered:) do
+        BulmaPhlex::Columns.new(minimum_breakpoint:, multiline:, gap:, centered:, vcentered:, **html_attributes) do
           @template.concat(columns)
         end.render_in(@template)
       end
@@ -208,18 +212,22 @@ module BulmaPhlex
       # - `gap`: (optional) Sets the gap size between grid items from 1-8 with 0.5 increments.
       # - `column_gap`: (optional) Sets the column gap size between grid items from 1-8 with 0.5 increments.
       # - `row_gap`: (optional) Sets the row gap size between grid items from 1-8 with 0.5 increments.
+      #
+      # Any additional HTML attributes passed to the `grid` method will be applied to the outer grid container.
       def grid(fixed_columns: nil, # rubocop:disable Metrics/ParameterLists
                auto_count: false,
                minimum_column_width: nil,
                gap: nil,
                column_gap: nil,
                row_gap: nil,
+               **html_attributes,
                &)
         @grid_flag = true
         cells = @template.capture(&)
         @grid_flag = false
 
-        BulmaPhlex::Grid.new(fixed_columns:, auto_count:, minimum_column_width:, gap:, column_gap:, row_gap:) do
+        BulmaPhlex::Grid.new(fixed_columns:, auto_count:, minimum_column_width:, gap:, column_gap:, row_gap:,
+                             **html_attributes) do
           @template.concat(cells)
         end.render_in(@template)
       end
