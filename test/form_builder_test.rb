@@ -799,6 +799,15 @@ module BulmaPhlex
           </div>
         HTML
       end
+
+      def test_columns_with_html_attributes
+        html = @form.columns(class: "mt-2") do
+          @form.text_field(:name) +
+            @form.email_field(:email, column: "two-thirds")
+        end
+
+        assert_html_includes html, 'class="columns mt-2"'
+      end
     end
 
     class FormBuilderGridTest < FormBuilderTestBase
@@ -850,6 +859,15 @@ module BulmaPhlex
             </div>
           </div>
         HTML
+      end
+
+      def test_grid_with_html_attributes
+        html = @form.grid(class: "mt-2") do
+          @form.text_field(:name) +
+            @form.email_field(:email, grid: "col-span-3")
+        end
+
+        assert_html_includes html, 'class="grid mt-2"'
       end
     end
   end
