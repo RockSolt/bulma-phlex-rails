@@ -171,7 +171,7 @@ end
 
 #### Collection Radio Buttons and Checkboxes
 
-Both the `collection_radio_buttons` and `collection_checkboxes` methods wrap the inputss with the Bulma structure and styles including a label. Add option `stacked: true` to stack the inputs vertically.
+Both the `collection_radio_buttons` and `collection_checkboxes` methods wrap the inputs with the Bulma structure and styles including a label. Add option `stacked: true` to stack the inputs vertically.
 
 ```ruby
 form.collection_radio_buttons(:author_id, Author.all, :id, :name_with_initial)
