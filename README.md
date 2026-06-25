@@ -433,7 +433,7 @@ Method `in_grid` creates a Bulma grid container for organizing display fields. I
 
 ## Bulma Components
 
-Bulma provides a wide variety of components to make you applications look great. This extends the `bulma-phlex` gem, bringing in the all those components to make it easy to add a Navigation Bar, Table, Cards, and more to your Rails application. See the [bulma-phlex gem](https://github.com/RockSolt/bulma-phlex?tab=readme-ov-file#usage) for the full list of components.
+Bulma provides a wide variety of components to make your applications look great. This extends the `bulma-phlex` gem, bringing in the all those components to make it easy to add a Navigation Bar, Table, Cards, and more to your Rails application. See the [bulma-phlex gem](https://github.com/RockSolt/bulma-phlex?tab=readme-ov-file#usage) for the full list of components.
 
 In some cases, the components are extended here with Rails features.
 
