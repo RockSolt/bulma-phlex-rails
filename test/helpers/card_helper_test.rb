@@ -31,12 +31,10 @@ module BulmaPhlex
         expected_html = <<~HTML
           <div class="card">
             <div class="card-content">
-              <div class="content">
-                <turbo-frame id="my-frame" src="/some-path">
-                  <span class="icon"><i class="fas fa-spinner fa-pulse"></i></span>
-                  <span>Loading...</span>
-                </turbo-frame>
-              </div>
+              <turbo-frame id="my-frame" src="/some-path">
+                <span class="icon"><i class="fas fa-spinner fa-pulse"></i></span>
+                <span>Loading...</span>
+              </turbo-frame>
             </div>
           </div>
         HTML
