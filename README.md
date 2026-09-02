@@ -220,7 +220,6 @@ The `button` method renders a Bulma-styled button and accepts the same Bulma sty
 form.button "Preview", color: "info", icon_left: "fas fa-eye"
 ```
 
-
 ### Nested Forms
 
 Add and remove rows from nested forms with form builder methods `nested_form_add_button` and `nested_form_delete_button`. These work with Rails' `fields_for` helper to create dynamic nested forms.
@@ -241,6 +240,7 @@ The delete button will either hide the row and mark it for deletion (for existin
 Both methods accept the following options:
 
 **`nested_form_delete_button`**:
+
 - `row_selector`: (String, required) CSS selector passed to `closest()` to identify the row to delete
 - `label`: (String, optional) Button label text
 - `icon`: (String, optional) Icon class displayed on the left (shorthand for `icon_left`)
@@ -248,6 +248,7 @@ Both methods accept the following options:
 - `icon_right`: (String, optional) Icon class displayed on the right of the button
 
 **`nested_form_add_button`**:
+
 - `record_name`: (Symbol, required) The name of the nested association (e.g., `:tasks`)
 - `container`: (String, required) CSS selector for the container where new rows are appended
 - `label`: (String, optional) Button label text
@@ -256,7 +257,6 @@ Both methods accept the following options:
 - `icon_right`: (String, optional) Icon class displayed on the right of the button
 
 Both methods also accept Bulma button styling options: `color`, `size`, `mode`, `responsive`, `fullwidth`, `outlined`, `inverted`, and `rounded`.
-
 
 ### Columns and Grids
 
@@ -317,7 +317,7 @@ You can use the following options for the Bulma grids:
 
 - `fixed_columns`: (Integer, optional) Specifies a fixed number of columns for the grid.
 - `auto_count`: (Boolean, optional) If true, the grid will automatically adjust the number
-   of columns based on the content.
+  of columns based on the content.
 - `minimum_column_width`: (Integer 1-32, optional) Sets a minimum width for the columns in the grid.
 - `gap`: (optional) Sets the gap size between grid items from 1-8 with 0.5 increments.
 - `column_gap`: (optional) Sets the column gap size between grid items from 1-8 with 0.5 increments.
@@ -336,7 +336,6 @@ end
 ```
 
 All of the power of Bulma columns and grids are at your fingertips with an easy-to-use, Rails-friendly API.
-
 
 ### Form Addons and Groups--Coming Soon!
 
@@ -359,13 +358,11 @@ form.group do
 end
 ```
 
-
 ## Display Components and Helpers
 
 The utilities and clean look of forms is also available for displaying data. The Phlex mixin `BulmaPhlex::Rails::DisplayableFormFields` makes it easy to show and organize fields.
 
 <img width="741" height="171" alt="Displayable form fields" src="https://github.com/user-attachments/assets/c75c4ab4-a1dd-4bab-ac26-c2c00d164eb0" />
-
 
 ```ruby
 with_options model: invoice do
@@ -395,7 +392,6 @@ Method `show_text` renders a label and read-only input field for displaying text
 - `options`: Hash - Additional Bulma form field options can be passed, such as `:help`, `:icon_left`, `:icon_right`,
   `:column`, and `:grid`.
 
-
 ### Show Date
 
 Method `show_date` renders a label and read-only date field. An optional `format` key can be provided with the options to specify the date format. This is passed to the Rails `to_fs` method.
@@ -406,7 +402,6 @@ Method `show_date` renders a label and read-only date field. An optional `format
   via the `options` (helpful when using `with_options`).
 - `method`: Symbol or String - The attribute method name for the date field.
 - `options`: Hash - Additional options for the display field. This can include the `format` key, which gets to the Rails `to_fs` method.
-
 
 ### Show Currency
 
@@ -420,16 +415,13 @@ Method `show_currency` renders a label and read-only currency field. An optional
 - `options`: Hash - Additional options for the display field. This can include the
   `currency_options` key, which should be a hash of options passed to `number_to_currency`.
 
-
 ### Columns
 
 Method `in_columns` creates a Bulma columns container for organizing display fields. Individual fields can optionally specify their column sizes via the `column` option.
 
-
 ### Grids
 
 Method `in_grid` creates a Bulma grid container for organizing display fields. Individual fields can optionally specify their grid cell sizes via the `grid` option.
-
 
 ## Bulma Components
 
@@ -440,6 +432,16 @@ In some cases, the components are extended here with Rails features.
 ### Turbo-Powered Cards
 
 For example, the `BulmaPhlex::Card` component provides the standard card. With the Rails extension, your card can now use Turbo Frames for dynamic content loading.
+
+The default pending icon can be configured alongside the icons used by core BulmaPhlex components:
+
+```ruby
+BulmaPhlex.configure do |config|
+  config.icons.turbo_frame_pending = "fa-solid fa-spinner fa-pulse"
+end
+```
+
+The `pending_icon:` option on `turbo_frame_content` overrides the configured default for an individual frame.
 
 ```ruby
 render BulmaPhlex::Card.new do |card|

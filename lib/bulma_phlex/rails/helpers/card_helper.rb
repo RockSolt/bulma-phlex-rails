@@ -17,10 +17,10 @@ module BulmaPhlex
       #
       # The two pending attributes have the following defaults:
       # - pending_message: "Loading..."
-      # - pending_icon: "fas fa-spinner fa-pulse"
+      # - pending_icon: configured Turbo Frame pending icon
       def turbo_frame_content(*ids, src: nil, target: nil, **attributes)
         pending_message = attributes.delete(:pending_message) || "Loading..."
-        pending_icon = attributes.delete(:pending_icon) || "fas fa-spinner fa-pulse"
+        pending_icon = attributes.delete(:pending_icon) || BulmaPhlex.config.icons.turbo_frame_pending
 
         content do
           turbo_frame_tag ids, src: src, target: target, **attributes do
