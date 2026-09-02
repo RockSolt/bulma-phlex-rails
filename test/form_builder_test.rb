@@ -194,7 +194,7 @@ module BulmaPhlex
                   <input class="file-input" type="file" name="test_model[attachment]" id="test_model_attachment" />
                   <span class="file-cta">
                     <span class="file-icon">
-                      <i class="fas fa-upload"></i>
+                      <i class="fa-solid fa-upload"></i>
                     </span>
                     <span class="file-label">Choose a file…</span>
                   </span>
@@ -217,7 +217,7 @@ module BulmaPhlex
                   <input class="file-input" type="file" name="test_model[attachment]" id="test_model_attachment" />
                   <span class="file-cta">
                     <span class="file-icon">
-                      <i class="fas fa-upload"></i>
+                      <i class="fa-solid fa-upload"></i>
                     </span>
                     <span class="file-label">Choose a file…</span>
                   </span>
@@ -256,7 +256,7 @@ module BulmaPhlex
                   <input class="file-input" data-bulma-phlex--file-input-display-target="fileInput" data-action="bulma-phlex--file-input-display#show" type="file" name="test_model[attachment]" id="test_model_attachment" />
                   <span class="file-cta">
                     <span class="file-icon">
-                      <i class="fas fa-upload"></i>
+                      <i class="fa-solid fa-upload"></i>
                     </span>
                     <span class="file-label"> Choose a file… </span>
                   </span>

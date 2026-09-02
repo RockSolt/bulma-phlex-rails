@@ -21,6 +21,8 @@ loader.setup
 
 require "bulma_phlex/rails/engine"
 
+BulmaPhlex::Configuration::Icons.prepend(BulmaPhlex::Rails::ConfigurableIcons)
+
 # Rails-specific extensions to BulmaPhlex components
 BulmaPhlex::Card.include(BulmaPhlex::Rails::CardHelper) if defined?(Turbo)
 BulmaPhlex::Table.include(BulmaPhlex::Rails::TableHelper)
