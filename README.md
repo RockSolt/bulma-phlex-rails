@@ -323,7 +323,7 @@ You can use the following options for the Bulma grids:
 - `column_gap`: (optional) Sets the column gap size between grid items from 1-8 with 0.5 increments.
 - `row_gap`: (optional) Sets the row gap size between grid items from 1-8 with 0.5 increments.
 
-You can still provide guidance on the individualgrid cell sizes:
+You can still provide guidance on the individual grid cell sizes:
 
 ```ruby
 form.grid do
